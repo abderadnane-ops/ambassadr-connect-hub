@@ -3,25 +3,34 @@ import { MapPin, ChevronDown, ChevronUp, Users, ArrowRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { regions, ambassadors } from "@/data/mock-data";
+import MoroccoMap from "@/components/map/MoroccoMap";
 
 const MapPage = () => {
   const [expandedRegion, setExpandedRegion] = useState<string | null>(null);
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const totalAmbassadors = regions.reduce((s, r) => s + r.ambassadorCount, 0);
+
+  const handleRegionSelect = (regionId: string) => {
+    setSelectedRegion(regionId);
+    setExpandedRegion(regionId);
+    const el = document.getElementById(`region-${regionId}`);
+    el?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
 
   return (
     <div className="px-4 py-4 space-y-4">
-      {/* Header */}
       <div className="animate-fade-in">
         <h2 className="font-display text-xl font-bold">Carte du Maroc</h2>
         <p className="text-sm text-muted-foreground mt-1">{totalAmbassadors} ambassadeurs dans 12 régions</p>
       </div>
 
-      {/* Visual Map placeholder */}
-      <Card className="border-0 shadow-elevated gradient-hero rounded-2xl overflow-hidden animate-fade-in" style={{ animationDelay: "0.1s", opacity: 0 }}>
-        <CardContent className="p-6 text-center text-white">
-          <MapPin className="w-10 h-10 mx-auto mb-2 opacity-80" />
-          <h3 className="font-display font-bold text-lg">Royaume du Maroc</h3>
-          <p className="text-sm opacity-80 mt-1">12 Régions • {totalAmbassadors} Ambassadeurs</p>
+      {/* Interactive Morocco Map */}
+      <Card className="border-0 shadow-elevated rounded-2xl overflow-hidden animate-fade-in" style={{ animationDelay: "0.1s", opacity: 0 }}>
+        <CardContent className="p-2">
+          <MoroccoMap
+            selectedRegion={selectedRegion}
+            onRegionSelect={handleRegionSelect}
+          />
         </CardContent>
       </Card>
 
@@ -33,12 +42,18 @@ const MapPage = () => {
 
           return (
             <Card
+              id={`region-${region.id}`}
               key={region.id}
-              className="border-0 shadow-card animate-fade-in overflow-hidden"
+              className={`border-0 shadow-card animate-fade-in overflow-hidden transition-all ${
+                selectedRegion === region.id ? "ring-2 ring-secondary shadow-glow-green" : ""
+              }`}
               style={{ animationDelay: `${0.15 + i * 0.04}s`, opacity: 0 }}
             >
               <button
-                onClick={() => setExpandedRegion(isExpanded ? null : region.id)}
+                onClick={() => {
+                  setExpandedRegion(isExpanded ? null : region.id);
+                  setSelectedRegion(region.id);
+                }}
                 className="w-full text-left"
               >
                 <CardContent className="p-4 flex items-center justify-between">
