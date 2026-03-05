@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import {
   Users, Briefcase, FolderOpen, MapPin, AlertTriangle, ArrowRight,
-  Newspaper, ChevronRight, Zap, BookOpen, Calendar, TrendingUp,
-  Target, Clock, BarChart3, Activity, Flame, Heart
+  Newspaper, ChevronRight, BookOpen, Calendar, TrendingUp,
+  Target, Clock, BarChart3, Activity, Flame, Heart, Coffee, FileText
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -34,10 +35,10 @@ const stats = [
 ];
 
 const quickActions = [
-  { label: "Postuler", icon: Zap, color: "bg-secondary text-secondary-foreground" },
-  { label: "Ressources", icon: BookOpen, color: "bg-primary text-primary-foreground" },
-  { label: "Événements", icon: Calendar, color: "bg-accent text-accent-foreground" },
-  { label: "Projets", icon: FolderOpen, color: "bg-highlight text-highlight-foreground" },
+  { label: "Organiser", icon: Coffee, color: "bg-secondary text-secondary-foreground", path: "/event-application" },
+  { label: "Rapport", icon: FileText, color: "bg-primary text-primary-foreground", path: "/event-report" },
+  { label: "Ressources", icon: BookOpen, color: "bg-accent text-accent-foreground", path: "/resources" },
+  { label: "Projets", icon: FolderOpen, color: "bg-highlight text-highlight-foreground", path: "/" },
 ];
 
 const activityData = [
@@ -183,7 +184,8 @@ const Dashboard = () => {
       {/* Quick Actions */}
       <div className="grid grid-cols-4 gap-2">
         {quickActions.map((action, i) => (
-          <button
+          <Link
+            to={action.path}
             key={action.label}
             className="flex flex-col items-center gap-1.5 animate-fade-in group"
             style={{ animationDelay: `${0.32 + i * 0.04}s`, opacity: 0 }}
@@ -192,7 +194,7 @@ const Dashboard = () => {
               <action.icon className="w-5 h-5" />
             </div>
             <span className="text-[10px] font-medium text-muted-foreground">{action.label}</span>
-          </button>
+          </Link>
         ))}
       </div>
 
