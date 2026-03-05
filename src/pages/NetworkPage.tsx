@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Search, Star, Trophy, ArrowLeft, FolderOpen } from "lucide-react";
+import { Search, Star, Trophy, ArrowLeft, FolderOpen, Users, Map } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+
 import { ambassadors, badgeInfo, projects } from "@/data/mock-data";
 import type { Ambassador } from "@/data/mock-data";
+import MoroccoMap from "@/components/map/MoroccoMap";
 
 const skillColors = [
   "bg-primary/10 text-primary",
@@ -15,7 +16,9 @@ const skillColors = [
 ];
 
 const NetworkPage = () => {
+  const [view, setView] = useState<"members" | "map">("members");
   const [search, setSearch] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [selectedProfile, setSelectedProfile] = useState<Ambassador | null>(null);
   const sorted = [...ambassadors].sort((a, b) => b.points - a.points);
   const filtered = sorted.filter(
@@ -110,6 +113,33 @@ const NetworkPage = () => {
         <p className="text-sm text-muted-foreground mt-1">{ambassadors.length} ambassadeurs</p>
       </div>
 
+      {/* View toggle */}
+      <div className="flex gap-2 animate-fade-in" style={{ animationDelay: "0.05s", opacity: 0 }}>
+        <button
+          onClick={() => setView("members")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+            view === "members" ? "bg-primary text-primary-foreground shadow-card" : "bg-muted text-muted-foreground"
+          }`}
+        >
+          <Users className="w-3.5 h-3.5" /> Membres
+        </button>
+        <button
+          onClick={() => setView("map")}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+            view === "map" ? "bg-primary text-primary-foreground shadow-card" : "bg-muted text-muted-foreground"
+          }`}
+        >
+          <Map className="w-3.5 h-3.5" /> Carte
+        </button>
+      </div>
+
+      {view === "map" ? (
+        <div className="animate-fade-in">
+          <MoroccoMap selectedRegion={selectedRegion} onRegionSelect={setSelectedRegion} />
+        </div>
+      ) : (
+        <>
+
       <div className="relative animate-fade-in" style={{ animationDelay: "0.1s", opacity: 0 }}>
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
         <Input
@@ -180,6 +210,8 @@ const NetworkPage = () => {
           </Card>
         ))}
       </div>
+      </>
+      )}
     </div>
   );
 };
