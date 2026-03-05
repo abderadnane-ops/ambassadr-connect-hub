@@ -1,13 +1,11 @@
-import { Home, Briefcase, Users, Rss, MessageCircle, BookOpen } from "lucide-react";
+import { Home, Briefcase, Users, MessageCircle } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const tabs = [
   { path: "/", icon: Home, label: "Accueil" },
-  { path: "/feed", icon: Rss, label: "Feed" },
   { path: "/network", icon: Users, label: "Réseau" },
-  { path: "/opportunities", icon: Briefcase, label: "Opportunités" },
-  { path: "/library", icon: BookOpen, label: "Biblio" },
+  { path: "/resources", icon: Briefcase, label: "Ressources" },
   { path: "/hub", icon: MessageCircle, label: "Hub", badge: 19 },
 ];
 

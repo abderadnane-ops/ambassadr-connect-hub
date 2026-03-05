@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { announcements, opportunities, projects, regions } from "@/data/mock-data";
+import FeedPage from "./FeedPage";
 
 // Personal mock data
 const myProfile = {
@@ -363,6 +364,18 @@ const Dashboard = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+      </section>
+
+      {/* Community Feed */}
+      <section className="animate-fade-in" style={{ animationDelay: "0.64s", opacity: 0 }}>
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="font-display font-semibold text-base flex items-center gap-2">
+            <Newspaper className="w-4 h-4 text-primary" /> Communauté
+          </h3>
+        </div>
+        <div className="-mx-4">
+          <FeedPage />
         </div>
       </section>
     </div>
