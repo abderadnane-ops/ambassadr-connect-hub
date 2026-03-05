@@ -1,35 +1,50 @@
+import { useState, useRef } from "react";
 import { regions, ambassadors } from "@/data/mock-data";
 
-// Approximate geographic positions for each region on the SVG map (percentage-based)
-const regionPositions: Record<string, { x: number; y: number }> = {
-  "1": { x: 28, y: 10 },   // Tanger-Tétouan-Al Hoceïma
-  "2": { x: 65, y: 18 },   // L'Oriental
-  "3": { x: 48, y: 25 },   // Fès-Meknès
-  "4": { x: 25, y: 28 },   // Rabat-Salé-Kénitra
-  "5": { x: 50, y: 38 },   // Béni Mellal-Khénifra
-  "6": { x: 28, y: 38 },   // Casablanca-Settat
-  "7": { x: 35, y: 50 },   // Marrakech-Safi
-  "8": { x: 62, y: 50 },   // Drâa-Tafilalet
-  "9": { x: 30, y: 62 },   // Souss-Massa
-  "10": { x: 25, y: 73 },  // Guelmim-Oued Noun
-  "11": { x: 22, y: 83 },  // Laâyoune-Sakia El Hamra
-  "12": { x: 20, y: 94 },  // Dakhla-Oued Ed-Dahab
+// Real lat/lng coordinates for each region center
+const regionCoords: Record<string, { lat: number; lng: number }> = {
+  "1": { lat: 35.58, lng: -5.37 },    // Tanger-Tétouan-Al Hoceïma
+  "2": { lat: 34.31, lng: -2.37 },    // L'Oriental
+  "3": { lat: 33.93, lng: -4.98 },    // Fès-Meknès
+  "4": { lat: 34.02, lng: -6.83 },    // Rabat-Salé-Kénitra
+  "5": { lat: 32.34, lng: -6.36 },    // Béni Mellal-Khénifra
+  "6": { lat: 33.53, lng: -7.58 },    // Casablanca-Settat
+  "7": { lat: 31.63, lng: -8.00 },    // Marrakech-Safi
+  "8": { lat: 31.15, lng: -5.05 },    // Drâa-Tafilalet
+  "9": { lat: 30.42, lng: -9.60 },    // Souss-Massa
+  "10": { lat: 28.98, lng: -10.06 },  // Guelmim-Oued Noun
+  "11": { lat: 27.15, lng: -13.20 },  // Laâyoune-Sakia El Hamra
+  "12": { lat: 23.72, lng: -15.93 },  // Dakhla-Oued Ed-Dahab
 };
 
-// Distribute ambassadors around their region center
-const getAmbassadorPositions = (regionId: string) => {
-  const center = regionPositions[regionId];
-  if (!center) return [];
+// Convert lat/lng to percentage position on the map container
+// Morocco bounds including Sahara: ~21°N to ~36°N, ~-17°W to ~-1°W
+const MAP_BOUNDS = {
+  north: 36.5,
+  south: 21.0,
+  west: -17.5,
+  east: -0.5,
+};
+
+const latLngToPercent = (lat: number, lng: number) => ({
+  x: ((lng - MAP_BOUNDS.west) / (MAP_BOUNDS.east - MAP_BOUNDS.west)) * 100,
+  y: ((MAP_BOUNDS.north - lat) / (MAP_BOUNDS.north - MAP_BOUNDS.south)) * 100,
+});
+
+const getAmbassadorPins = (regionId: string) => {
+  const coords = regionCoords[regionId];
+  if (!coords) return [];
   const regionName = regions.find((r) => r.id === regionId)?.name || "";
   const regionAmbs = ambassadors.filter((a) => a.region === regionName);
+  const center = latLngToPercent(coords.lat, coords.lng);
 
   return regionAmbs.map((amb, i) => {
     const angle = (i / Math.max(regionAmbs.length, 1)) * Math.PI * 2 - Math.PI / 2;
-    const radius = regionAmbs.length > 1 ? 4 : 0;
+    const radius = regionAmbs.length > 1 ? 3.5 : 0;
     return {
       ...amb,
-      cx: center.x + Math.cos(angle) * radius,
-      cy: center.y + Math.sin(angle) * radius,
+      x: center.x + Math.cos(angle) * radius,
+      y: center.y + Math.sin(angle) * radius,
     };
   });
 };
@@ -40,168 +55,96 @@ interface Props {
 }
 
 const MoroccoMap = ({ selectedRegion, onRegionSelect }: Props) => {
-  const allAmbassadorPins = regions.flatMap((r) => getAmbassadorPositions(r.id));
+  const allPins = regions.flatMap((r) => getAmbassadorPins(r.id));
 
   return (
-    <div className="relative w-full" style={{ aspectRatio: "3 / 4" }}>
-      <svg viewBox="0 0 100 100" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        {/* Morocco outline (simplified) */}
-        <defs>
-          <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(var(--muted))" />
-            <stop offset="100%" stopColor="hsl(var(--background))" />
-          </linearGradient>
-          <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(var(--primary))" />
-            <stop offset="50%" stopColor="hsl(var(--accent))" />
-            <stop offset="100%" stopColor="hsl(var(--secondary))" />
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="0.8" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <filter id="shadow">
-            <feDropShadow dx="0" dy="0.3" stdDeviation="0.4" floodColor="hsl(var(--primary))" floodOpacity="0.3" />
-          </filter>
-        </defs>
+    <div className="relative w-full rounded-2xl overflow-hidden" style={{ aspectRatio: "4 / 5" }}>
+      {/* Google Maps iframe - Morocco with Sahara */}
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7500000!2d-8.0!3d29.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sma!4v1700000000000!5m2!1sen!2sma"
+        className="absolute inset-0 w-full h-full border-0"
+        allowFullScreen={false}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        style={{ filter: "saturate(0.4) brightness(1.05)" }}
+        title="Carte du Maroc"
+      />
 
-        {/* Morocco shape */}
-        <path
-          d="M 15 5 L 35 3 L 50 5 L 65 8 L 75 15 L 78 25 L 72 35 L 68 42 L 70 55 L 65 65 L 55 60 L 45 55 L 38 58 L 32 65 L 28 72 L 25 78 L 22 85 L 20 92 L 18 98 L 12 98 L 10 90 L 12 80 L 15 72 L 18 65 L 15 55 L 12 48 L 10 40 L 12 30 L 15 22 L 12 15 L 15 5 Z"
-          fill="url(#mapGradient)"
-          stroke="hsl(var(--border))"
-          strokeWidth="0.5"
-          className="drop-shadow-sm"
-        />
-
-        {/* Region dots with labels */}
+      {/* Overlay to capture clicks and display pins */}
+      <div className="absolute inset-0 z-10">
+        {/* Region center markers with count */}
         {regions.map((region) => {
-          const pos = regionPositions[region.id];
-          if (!pos) return null;
+          const coords = regionCoords[region.id];
+          if (!coords) return null;
+          const pos = latLngToPercent(coords.lat, coords.lng);
           const isSelected = selectedRegion === region.id;
 
           return (
-            <g
+            <button
               key={region.id}
               onClick={() => onRegionSelect(region.id)}
-              className="cursor-pointer"
-              role="button"
-              tabIndex={0}
+              className="absolute transform -translate-x-1/2 -translate-y-1/2 group"
+              style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
             >
-              {/* Region pulse ring */}
+              {/* Pulse ring on selected */}
               {isSelected && (
-                <circle
-                  cx={pos.x}
-                  cy={pos.y}
-                  r="6"
-                  fill="none"
-                  stroke="hsl(var(--secondary))"
-                  strokeWidth="0.3"
-                  opacity="0.5"
-                >
-                  <animate attributeName="r" from="4" to="8" dur="1.5s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" from="0.6" to="0" dur="1.5s" repeatCount="indefinite" />
-                </circle>
+                <span className="absolute inset-0 -m-3 rounded-full border-2 border-secondary animate-ping opacity-40" />
               )}
 
-              {/* Region center marker */}
-              <circle
-                cx={pos.x}
-                cy={pos.y}
-                r={isSelected ? "2.5" : "2"}
-                fill={isSelected ? "hsl(var(--secondary))" : "hsl(var(--primary))"}
-                opacity={isSelected ? 1 : 0.6}
-                filter="url(#shadow)"
-                className="transition-all duration-300"
-              />
-
-              {/* Ambassador count label */}
-              <text
-                x={pos.x}
-                y={pos.y - 3.5}
-                textAnchor="middle"
-                fontSize="2.2"
-                fontWeight="700"
-                fill="hsl(var(--foreground))"
-                fontFamily="Space Grotesk, sans-serif"
+              {/* Count badge */}
+              <span
+                className={`flex items-center justify-center min-w-[22px] h-[22px] rounded-full text-[9px] font-bold px-1 shadow-lg transition-all duration-300 ${
+                  isSelected
+                    ? "bg-secondary text-secondary-foreground scale-125 shadow-glow-green"
+                    : "bg-primary text-primary-foreground group-hover:scale-110"
+                }`}
               >
                 {region.ambassadorCount}
-              </text>
-            </g>
+              </span>
+            </button>
           );
         })}
 
         {/* Ambassador avatar circles */}
-        {allAmbassadorPins.map((amb, i) => {
+        {allPins.map((amb, i) => {
           const isInSelected = selectedRegion
             ? regions.find((r) => r.id === selectedRegion)?.name === amb.region
             : false;
 
           return (
-            <g key={amb.id} filter={isInSelected ? "url(#glow)" : undefined}>
-              {/* White border ring */}
-              <circle
-                cx={amb.cx}
-                cy={amb.cy}
-                r="2"
-                fill="white"
-                stroke={isInSelected ? "hsl(var(--secondary))" : "hsl(var(--border))"}
-                strokeWidth="0.3"
-                className="transition-all duration-300"
-                style={{
-                  animationDelay: `${i * 0.05}s`,
-                }}
-              />
-              {/* Gradient avatar background */}
-              <circle
-                cx={amb.cx}
-                cy={amb.cy}
-                r="1.7"
-                fill="url(#heroGrad)"
-                className="transition-all duration-300"
-              />
-              {/* Initials */}
-              <text
-                x={amb.cx}
-                y={amb.cy + 0.6}
-                textAnchor="middle"
-                fontSize="1.4"
-                fontWeight="700"
-                fill="white"
-                fontFamily="Space Grotesk, sans-serif"
+            <div
+              key={amb.id}
+              className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
+                isInSelected ? "z-20 scale-125" : "z-10"
+              }`}
+              style={{
+                left: `${amb.x}%`,
+                top: `${amb.y}%`,
+                animationDelay: `${i * 0.05}s`,
+              }}
+            >
+              <div
+                className={`w-7 h-7 rounded-full gradient-hero flex items-center justify-center text-white font-display font-bold text-[8px] ring-2 transition-all duration-300 ${
+                  isInSelected
+                    ? "ring-secondary shadow-glow-green"
+                    : "ring-white/80 shadow-md"
+                }`}
               >
                 {amb.avatar}
-              </text>
-            </g>
+              </div>
+            </div>
           );
         })}
-
-        {/* Country label */}
-        <text
-          x="40"
-          y="44"
-          textAnchor="middle"
-          fontSize="3.5"
-          fontWeight="700"
-          fill="hsl(var(--primary))"
-          opacity="0.12"
-          fontFamily="Space Grotesk, sans-serif"
-        >
-          MAROC
-        </text>
-      </svg>
+      </div>
 
       {/* Legend */}
-      <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between px-2 py-1.5 rounded-xl bg-card/80 backdrop-blur-sm border border-border/50 text-[9px] text-muted-foreground">
+      <div className="absolute bottom-2 left-2 right-2 z-30 flex items-center justify-between px-3 py-2 rounded-xl bg-card/90 backdrop-blur-md border border-border/50 text-[9px] text-muted-foreground shadow-elevated">
         <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full gradient-hero inline-block" />
+          <span className="w-3 h-3 rounded-full gradient-hero inline-block ring-1 ring-white/80" />
           <span>Ambassadeur</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-primary inline-block opacity-60" />
+          <span className="w-3 h-3 rounded-full bg-primary inline-block" />
           <span>Centre région</span>
         </div>
         <span className="font-semibold">{ambassadors.length} affichés</span>
