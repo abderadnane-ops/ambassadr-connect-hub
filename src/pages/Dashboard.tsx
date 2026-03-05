@@ -1,13 +1,13 @@
 import {
-  Users, Briefcase, FolderOpen, MapPin, AlertTriangle, ArrowRight, Star,
-  Newspaper, ChevronRight, Zap, BookOpen, Calendar, TrendingUp, Award,
+  Users, Briefcase, FolderOpen, MapPin, AlertTriangle, ArrowRight,
+  Newspaper, ChevronRight, Zap, BookOpen, Calendar, TrendingUp,
   Target, Clock, BarChart3, Activity, Flame, Heart
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ambassadors, announcements, opportunities, projects, regions } from "@/data/mock-data";
+import { announcements, opportunities, projects, regions } from "@/data/mock-data";
 
 // Personal mock data
 const myProfile = {
@@ -59,7 +59,7 @@ const topRegions = regions.sort((a, b) => b.ambassadorCount - a.ambassadorCount)
 
 const Dashboard = () => {
   const urgentAnnouncement = announcements.find((a) => a.urgent);
-  const topAmbassadors = [...ambassadors].sort((a, b) => b.points - a.points).slice(0, 6);
+  
   const upcomingOpps = opportunities.filter((o) => o.status !== "closed").slice(0, 3);
   const pointsProgress = Math.round((myProfile.points / myProfile.monthlyGoal) * 100);
 
@@ -248,43 +248,6 @@ const Dashboard = () => {
         </div>
       </section>
 
-      {/* Top Ambassadors Carousel */}
-      <section className="animate-fade-in" style={{ animationDelay: "0.44s", opacity: 0 }}>
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="font-display font-semibold text-base flex items-center gap-2">
-            <Award className="w-4 h-4 text-highlight" /> Top Ambassadeurs
-          </h3>
-          <button className="text-xs text-primary flex items-center gap-0.5 font-medium">
-            Voir tout <ChevronRight className="w-3 h-3" />
-          </button>
-        </div>
-        <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
-          {topAmbassadors.map((amb, i) => (
-            <Card key={amb.id} className="shrink-0 w-32 border-0 shadow-card hover:shadow-elevated transition-shadow">
-              <CardContent className="p-3 flex flex-col items-center text-center">
-                <div className="relative">
-                  <div className="w-12 h-12 rounded-full gradient-hero flex items-center justify-center text-white font-display font-bold text-sm">
-                    {amb.avatar}
-                  </div>
-                  {i < 3 && (
-                    <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-highlight text-highlight-foreground text-[9px] font-bold flex items-center justify-center shadow-sm">
-                      {i + 1}
-                    </span>
-                  )}
-                </div>
-                <span className="text-xs font-semibold line-clamp-1 mt-2">{amb.name}</span>
-                <span className="text-[10px] text-muted-foreground line-clamp-1">{amb.region.split("-")[0]}</span>
-                <div className="flex items-center gap-1 mt-1.5">
-                  <Star className="w-3 h-3 text-highlight fill-highlight" />
-                  <span className="text-[10px] font-bold text-highlight">{amb.points}</span>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Regional Overview */}
       <section className="animate-fade-in" style={{ animationDelay: "0.48s", opacity: 0 }}>
         <h3 className="font-display font-semibold text-base mb-3 flex items-center gap-2">
           <MapPin className="w-4 h-4 text-primary" /> Régions les plus actives
