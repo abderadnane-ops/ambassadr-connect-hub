@@ -1,6 +1,7 @@
 import { Search, Bell } from "lucide-react";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import citizinLogo from "@/assets/citizin-logo.png";
 
 const TopBar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -19,11 +20,8 @@ const TopBar = () => {
           </div>
         ) : (
           <>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg gradient-hero flex items-center justify-center">
-                <span className="text-white font-display font-bold text-sm">CZ</span>
-              </div>
-              <h1 className="font-display font-bold text-lg text-foreground">CitiZin</h1>
+            <div className="flex items-center gap-1.5">
+              <img src={citizinLogo} alt="CitiZin" className="h-8 w-auto" />
             </div>
             <div className="flex items-center gap-1">
               <button
