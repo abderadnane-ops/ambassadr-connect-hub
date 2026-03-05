@@ -10,6 +10,7 @@ import OpportunitiesPage from "./pages/OpportunitiesPage";
 import NetworkPage from "./pages/NetworkPage";
 import HubPage from "./pages/HubPage";
 import FeedPage from "./pages/FeedPage";
+import LibraryPage from "./pages/LibraryPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/map" element={<MapPage />} />
             <Route path="/opportunities" element={<OpportunitiesPage />} />
             <Route path="/network" element={<NetworkPage />} />
+            <Route path="/library" element={<LibraryPage />} />
             <Route path="/hub" element={<HubPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

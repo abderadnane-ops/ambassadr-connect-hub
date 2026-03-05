@@ -1,4 +1,4 @@
-import { Home, Map, Briefcase, Users, Rss, MessageCircle } from "lucide-react";
+import { Home, Map, Briefcase, Users, Rss, MessageCircle, BookOpen } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +8,7 @@ const tabs = [
   { path: "/map", icon: Map, label: "Carte" },
   { path: "/opportunities", icon: Briefcase, label: "Opportunités" },
   { path: "/network", icon: Users, label: "Réseau" },
+  { path: "/library", icon: BookOpen, label: "Biblio" },
   { path: "/hub", icon: MessageCircle, label: "Hub", badge: 19 },
 ];
 
