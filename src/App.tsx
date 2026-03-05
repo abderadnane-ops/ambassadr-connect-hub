@@ -9,6 +9,7 @@ import MapPage from "./pages/MapPage";
 import OpportunitiesPage from "./pages/OpportunitiesPage";
 import NetworkPage from "./pages/NetworkPage";
 import HubPage from "./pages/HubPage";
+import FeedPage from "./pages/FeedPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
         <AppLayout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/feed" element={<FeedPage />} />
             <Route path="/map" element={<MapPage />} />
             <Route path="/opportunities" element={<OpportunitiesPage />} />
             <Route path="/network" element={<NetworkPage />} />

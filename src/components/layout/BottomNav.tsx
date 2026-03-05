@@ -1,13 +1,13 @@
-import { Home, Map, Briefcase, Users, MessageCircle } from "lucide-react";
+import { Home, Map, Briefcase, Users, Rss } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const tabs = [
   { path: "/", icon: Home, label: "Accueil" },
+  { path: "/feed", icon: Rss, label: "Fil" },
   { path: "/map", icon: Map, label: "Carte" },
   { path: "/opportunities", icon: Briefcase, label: "Opportunités" },
   { path: "/network", icon: Users, label: "Réseau" },
-  { path: "/hub", icon: MessageCircle, label: "Hub", badge: 19 },
 ];
 
 const BottomNav = () => {
@@ -35,11 +35,6 @@ const BottomNav = () => {
               )}
               <div className="relative">
                 <tab.icon className={cn("w-5 h-5", isActive && "stroke-[2.5]")} />
-                {tab.badge && (
-                  <span className="absolute -top-1.5 -right-2.5 min-w-[16px] h-4 rounded-full bg-secondary text-secondary-foreground text-[10px] font-bold flex items-center justify-center px-1">
-                    {tab.badge}
-                  </span>
-                )}
               </div>
               <span className={cn("text-[10px] font-medium", isActive && "font-bold")}>
                 {tab.label}
