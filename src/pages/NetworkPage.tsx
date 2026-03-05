@@ -114,7 +114,7 @@ const NetworkPage = () => {
       </div>
 
       {/* View toggle */}
-      <div className="flex gap-2 animate-fade-in" style={{ animationDelay: "0.05s", opacity: 0 }}>
+      <div className="flex gap-2 animate-fade-in" style={{ animationDelay: "0.05s" }}>
         <button
           onClick={() => setView("members")}
           className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold transition-all ${
