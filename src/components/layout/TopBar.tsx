@@ -21,7 +21,7 @@ const TopBar = () => {
         ) : (
           <>
             <div className="flex items-center gap-1.5">
-              <img src={citizinLogo} alt="CitiZin" className="h-8 w-auto" />
+              <img src={citizinLogo} alt="CitiZin" className="h-7 w-auto object-contain" />
             </div>
             <div className="flex items-center gap-1">
               <button
