@@ -142,17 +142,7 @@ const LoginPage = () => {
                 {loading ? "Connexion..." : role === "admin" ? "Connexion administrateur" : "Se connecter"}
               </Button>
 
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => {
-                  localStorage.setItem("demo_role", role === "admin" ? "admin" : "ambassador");
-                  window.location.href = role === "admin" ? "/admin/dashboard" : "/dashboard";
-                }}
-                className={cn("w-full h-11 rounded-xl font-semibold", role === "admin" && "border-[#A6CE39] text-[#A6CE39] hover:bg-[#A6CE39]/10")}
-              >
-                Accès démo {role === "admin" ? "Admin" : "Ambassadeur"}
-              </Button>
+
 
 
               {role === "admin" && (
