@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import {
   AlertTriangle, ChevronRight, Calendar, Target,
   Coffee, FileText, Briefcase, Clock, MapPin, Bell,
-  Users, GraduationCap, Megaphone, Sparkles
+  Users, GraduationCap, Megaphone, Sparkles, CalendarPlus,
+  CheckCircle, Loader2, Ban
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +12,8 @@ import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { announcements, opportunities } from "@/data/mock-data";
 import DashboardHero from "@/components/dashboard/DashboardHero";
+import { eventsData, type ParticipationStatus } from "@/pages/EventDetailPage";
+import { toast } from "@/hooks/use-toast";
 
 const myProfile = {
   name: "Amina",
@@ -25,11 +29,12 @@ const myTasks = [
   { id: "4", title: "Mettre à jour le profil", due: "Complété", done: true, priority: "low" },
 ];
 
-const upcomingEvents = [
-  { id: "1", title: "Café Citoyen Rabat", date: "12 Mars", time: "14:00", type: "Café Citoyen", location: "Rabat", attendees: 12, color: "secondary" as const },
-  { id: "2", title: "Lab Citoyens - Éducation", date: "18 Mars", time: "10:00", type: "Lab Citoyens", location: "Casablanca", attendees: 8, color: "accent" as const },
-  { id: "3", title: "Forum Régional", date: "25 Mars", time: "09:00", type: "Conférence", location: "Fès", attendees: 45, color: "primary" as const },
-];
+const statusButtonConfig: Record<ParticipationStatus, { label: string; icon: typeof CheckCircle; className: string; disabled: boolean }> = {
+  participer: { label: "Participer", icon: CalendarPlus, className: "bg-primary text-primary-foreground hover:bg-primary/90", disabled: false },
+  en_attente: { label: "En attente", icon: Loader2, className: "bg-highlight/15 text-highlight border border-highlight/30", disabled: true },
+  confirme: { label: "Confirmé", icon: CheckCircle, className: "bg-secondary/15 text-secondary border border-secondary/30", disabled: true },
+  complet: { label: "Complet", icon: Ban, className: "bg-destructive/15 text-destructive border border-destructive/30", disabled: true },
+};
 
 const quickActions = [
   { label: "Organiser", icon: Coffee, color: "bg-secondary text-secondary-foreground", path: "/event-application", desc: "Planifier un événement" },
@@ -70,6 +75,10 @@ const eventColorMap = {
 };
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const [participationStates, setParticipationStates] = useState<Record<string, ParticipationStatus>>(
+    Object.fromEntries(eventsData.map((e) => [e.id, e.participationStatus]))
+  );
   const urgentAnnouncement = announcements.find((a) => a.urgent);
   const otherAnnouncements = announcements.filter((a) => !a.urgent);
   const upcomingOpps = opportunities.filter((o) => o.status !== "closed").slice(0, 3);
@@ -163,12 +172,18 @@ const Dashboard = () => {
           </h3>
         </div>
         <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
-          {upcomingEvents.map((event) => {
+          {eventsData.map((event) => {
             const colors = eventColorMap[event.color];
+            const currentStatus = participationStates[event.id];
+            const btnConfig = statusButtonConfig[currentStatus];
+            const BtnIcon = btnConfig.icon;
             return (
-              <Card key={event.id} className={`shrink-0 w-64 border-0 border-l-4 ${colors.border} shadow-card hover:shadow-elevated transition-all duration-200 group overflow-hidden`}>
+              <Card
+                key={event.id}
+                className={`shrink-0 w-64 border-0 border-l-4 ${colors.border} shadow-card hover:shadow-elevated transition-all duration-200 group overflow-hidden cursor-pointer`}
+                onClick={() => navigate(`/event/${event.id}`)}
+              >
                 <CardContent className="p-0">
-                  {/* Color header strip */}
                   <div className={`${colors.gradient} px-4 pt-4 pb-3`}>
                     <Badge className={`${colors.badge} border-0 text-[10px] mb-2`}>{event.type}</Badge>
                     <h4 className="font-display font-semibold text-sm group-hover:text-primary transition-colors">{event.title}</h4>
@@ -185,16 +200,30 @@ const Dashboard = () => {
                     <div className="flex items-center justify-between pt-1">
                       <div className="flex items-center gap-1.5">
                         <Users className="w-3.5 h-3.5 text-muted-foreground" />
-                        <span className="text-xs font-medium">{event.attendees} participants</span>
+                        <span className="text-xs font-medium">{event.attendees}/{event.maxAttendees}</span>
                       </div>
                       <div className="flex -space-x-1.5">
-                        {["A", "B", "C"].map((letter) => (
-                          <Avatar key={letter} className="w-5 h-5 border border-card">
-                            <AvatarFallback className="text-[8px] bg-muted font-bold">{letter}</AvatarFallback>
+                        {event.participants.slice(0, 3).map((p) => (
+                          <Avatar key={p.initials} className="w-5 h-5 border border-card">
+                            <AvatarFallback className="text-[8px] bg-muted font-bold">{p.initials}</AvatarFallback>
                           </Avatar>
                         ))}
                       </div>
                     </div>
+                    <button
+                      className={`w-full h-8 rounded-md text-[11px] font-semibold flex items-center justify-center gap-1.5 mt-1 transition-all ${btnConfig.className}`}
+                      disabled={btnConfig.disabled}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (currentStatus === "participer") {
+                          setParticipationStates((prev) => ({ ...prev, [event.id]: "en_attente" }));
+                          toast({ title: "Demande envoyée", description: "Votre participation est en attente de validation." });
+                        }
+                      }}
+                    >
+                      <BtnIcon className={`w-3.5 h-3.5 ${currentStatus === "en_attente" ? "animate-spin" : ""}`} />
+                      {btnConfig.label}
+                    </button>
                   </div>
                 </CardContent>
               </Card>
