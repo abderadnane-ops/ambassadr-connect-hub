@@ -56,15 +56,15 @@ const LandingPage = () => {
             </p>
 
             <p className="text-base sm:text-lg text-white/60 italic mb-6">
-              One Network. Twelve Regions. A New Generation of Civic Leadership.
+              From multichannel confusion to one coordinated civic network
             </p>
 
             <p className="text-base text-white/75 max-w-xl mx-auto leading-relaxed mb-4">
-              CITZEN connecte 188 ambassadeurs citoyens dans les 12 régions du Maroc pour coordonner les initiatives, partager les projets et amplifier l'impact citoyen.
+              CITZEN connecte 188 ambassadeurs citoyens à travers les 12 régions du Maroc pour coordonner les initiatives, partager les projets et amplifier l'impact citoyen à l'échelle nationale.
             </p>
 
             <p className="text-sm text-white/40 tracking-wide mb-8">
-              Une initiative du mouvement <span className="text-[#A6CE39] font-semibold">Les Citoyens</span> — Mieux vivre ensemble
+              Une initiative du mouvement <span className="text-[#A6CE39] font-semibold">Les Citoyens</span><br />Mieux vivre ensemble
             </p>
 
             {/* Stats badges */}
@@ -72,7 +72,7 @@ const LandingPage = () => {
               {[
                 { value: "188", label: "Ambassadeurs Citoyens", icon: Users },
                 { value: "12", label: "Régions du Maroc", icon: MapPin },
-                { value: "1", label: "Réseau national", icon: Globe },
+                { value: "", label: "Réseau national d'initiatives citoyennes", icon: Globe },
               ].map((stat, i) => (
                 <div
                   key={i}
@@ -94,7 +94,7 @@ const LandingPage = () => {
               Connexion
             </Button>
             <p className="text-xs text-white/40">
-              Accès réservé aux Ambassadeurs Citoyens, Mentors et Administrateurs du réseau.
+              Accès réservé aux Ambassadeurs Citoyens, Mentors et Administrateurs du réseau
             </p>
           </div>
         </div>
@@ -107,19 +107,19 @@ const LandingPage = () => {
             {
               icon: Shield,
               title: "Les Citoyens",
-              desc: "Un mouvement engagé pour renforcer la participation citoyenne et former une nouvelle génération de leaders au Maroc.",
+              desc: "Les Citoyens est un mouvement engagé pour renforcer la participation citoyenne et accompagner une nouvelle génération de leaders au Maroc.",
               accent: "#A6CE39",
             },
             {
               icon: Users,
-              title: "Les Ambassadeurs",
-              desc: "188 jeunes leaders mobilisés dans 12 régions pour porter des initiatives citoyennes à fort impact.",
+              title: "Les Ambassadeurs Citoyens",
+              desc: "188 jeunes leaders engagés dans 12 régions du Maroc pour porter des initiatives citoyennes à fort impact.",
               accent: "#722D50",
             },
             {
               icon: Network,
               title: "La plateforme CITZEN",
-              desc: "Connecter, coordonner et amplifier les actions citoyennes à l'échelle nationale.",
+              desc: "Connecter, coordonner et amplifier les initiatives citoyennes à l'échelle nationale.",
               accent: "#A6CE39",
             },
           ].map((card, i) => (
@@ -143,7 +143,7 @@ const LandingPage = () => {
       {/* Footer */}
       <footer className="border-t border-[#722D50]/10 py-6 text-center bg-[#faf8f9]">
         <p className="text-[11px] text-[#722D50]/30 font-medium">
-          © 2026 CITZEN — Réseau des Ambassadeurs Citoyens · Les Citoyens
+          CITZEN — Plateforme du réseau des Ambassadeurs Citoyens<br />Une initiative du mouvement Les Citoyens
         </p>
       </footer>
     </div>
