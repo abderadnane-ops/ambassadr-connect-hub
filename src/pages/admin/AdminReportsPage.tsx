@@ -1,16 +1,20 @@
-import { FileText, Eye, CheckCircle, RotateCcw, Archive, Clock, MoreHorizontal } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
+import { FileText, Eye, CheckCircle, RotateCcw, Archive, Clock, MoreHorizontal, Search, MapPin, Users, TrendingUp } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const reports = [
-  { id: "1", title: "Café Citoyen Casablanca - Mars 2026", author: "Amina El Fassi", initials: "AE", date: "10 Mars 2026", participants: 28, status: "pending" },
-  { id: "2", title: "Lab Citoyens Rabat - Février 2026", author: "Fatima Zahra Ouali", initials: "FZ", date: "28 Fév 2026", participants: 18, status: "approved" },
-  { id: "3", title: "Café Citoyen Fès - Février 2026", author: "Hassan Alaoui", initials: "HA", date: "25 Fév 2026", participants: 22, status: "revision" },
-  { id: "4", title: "Atelier Engagement Tanger", author: "Nadia Chraibi", initials: "NC", date: "20 Fév 2026", participants: 15, status: "approved" },
-  { id: "5", title: "Forum Marrakech - Janvier 2026", author: "Karim Tazi", initials: "KT", date: "15 Jan 2026", participants: 45, status: "archived" },
+  { id: "1", title: "Café Citoyen Casablanca - Mars 2026", author: "Amina El Fassi", initials: "AE", date: "10 Mars 2026", participants: 28, region: "Casablanca-Settat", type: "Café Citoyen", status: "pending" },
+  { id: "2", title: "Lab Citoyens Rabat - Février 2026", author: "Fatima Zahra Ouali", initials: "FZ", date: "28 Fév 2026", participants: 18, region: "Rabat-Salé-Kénitra", type: "Lab Citoyens", status: "approved" },
+  { id: "3", title: "Café Citoyen Fès - Février 2026", author: "Hassan Alaoui", initials: "HA", date: "25 Fév 2026", participants: 22, region: "Fès-Meknès", type: "Café Citoyen", status: "revision" },
+  { id: "4", title: "Atelier Engagement Tanger", author: "Nadia Chraibi", initials: "NC", date: "20 Fév 2026", participants: 15, region: "Tanger-Tétouan", type: "Atelier", status: "approved" },
+  { id: "5", title: "Forum Marrakech - Janvier 2026", author: "Karim Tazi", initials: "KT", date: "15 Jan 2026", participants: 45, region: "Marrakech-Safi", type: "Forum", status: "archived" },
+  { id: "6", title: "Initiative recyclage Fès", author: "Omar Idrissi", initials: "OI", date: "10 Jan 2026", participants: 32, region: "Fès-Meknès", type: "Initiative", status: "approved" },
 ];
 
 const statusConfig: Record<string, { label: string; className: string }> = {
@@ -21,15 +25,49 @@ const statusConfig: Record<string, { label: string; className: string }> = {
 };
 
 const AdminReportsPage = () => {
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+
+  const filtered = reports.filter((r) => {
+    const matchSearch = r.title.toLowerCase().includes(search.toLowerCase()) || r.author.toLowerCase().includes(search.toLowerCase());
+    const matchStatus = statusFilter === "all" || r.status === statusFilter;
+    return matchSearch && matchStatus;
+  });
+
+  const pendingCount = reports.filter((r) => r.status === "pending").length;
+
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="font-display text-2xl font-bold">Rapports</h2>
-        <p className="text-sm text-muted-foreground mt-1">Examiner les rapports soumis par les ambassadeurs</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="font-display text-2xl font-bold">Rapports</h2>
+          <p className="text-sm text-muted-foreground mt-1">Examiner les rapports soumis par les ambassadeurs</p>
+        </div>
+        {pendingCount > 0 && <Badge className="bg-highlight/15 text-highlight border-0">{pendingCount} en attente</Badge>}
+      </div>
+
+      {/* Filters */}
+      <div className="flex flex-col sm:flex-row gap-3">
+        <div className="relative flex-1 max-w-sm">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <Input placeholder="Rechercher un rapport..." className="pl-9" value={search} onChange={(e) => setSearch(e.target.value)} />
+        </div>
+        <Select value={statusFilter} onValueChange={setStatusFilter}>
+          <SelectTrigger className="w-full sm:w-48">
+            <SelectValue placeholder="Tous les statuts" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Tous les statuts</SelectItem>
+            <SelectItem value="pending">En attente</SelectItem>
+            <SelectItem value="approved">Approuvé</SelectItem>
+            <SelectItem value="revision">Révision</SelectItem>
+            <SelectItem value="archived">Archivé</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="space-y-3">
-        {reports.map((report) => {
+        {filtered.map((report) => {
           const sc = statusConfig[report.status];
           return (
             <Card key={report.id} className="border-0 shadow-card hover:shadow-elevated transition-all">
@@ -44,11 +82,13 @@ const AdminReportsPage = () => {
                   <div className="flex items-center gap-2 flex-wrap">
                     <h3 className="font-display font-semibold text-sm">{report.title}</h3>
                     <Badge className={`${sc.className} border-0 text-[10px]`}>{sc.label}</Badge>
+                    <Badge className="bg-muted text-muted-foreground border-0 text-[10px]">{report.type}</Badge>
                   </div>
-                  <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground flex-wrap">
                     <span>{report.author}</span>
+                    <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{report.region}</span>
                     <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{report.date}</span>
-                    <span>{report.participants} participants</span>
+                    <span className="flex items-center gap-1"><Users className="w-3 h-3" />{report.participants} participants</span>
                   </div>
                 </div>
                 <DropdownMenu>
