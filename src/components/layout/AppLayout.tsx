@@ -58,7 +58,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full">
-        <Sidebar collapsible="offcanvas">
+        <Sidebar collapsible="icon">
           <SidebarHeader className="p-4">
             <div className="flex items-center gap-2">
               <img src={citizinLogoDark} alt="CITZEN" className="h-8 w-auto object-contain" />
