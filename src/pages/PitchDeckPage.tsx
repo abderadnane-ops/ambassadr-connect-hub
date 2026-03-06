@@ -69,7 +69,7 @@ const slides = [
           </div>
           <div className="flex items-center justify-center">
             <div className="relative w-full max-w-md">
-              {["WhatsApp", "Email", "Excel", "Téléphone", "Facebook"].map((tool, i) => (
+              {["WhatsApp", "Email", "Excel", "Phone", "Facebook"].map((tool, i) => (
                 <div key={i} className="absolute rounded-2xl border-2 border-dashed border-red-300 bg-red-50 px-6 py-4 text-lg font-medium text-red-400 shadow-sm"
                   style={{
                     left: `${[10, 45, 5, 50, 25][i]}%`,
@@ -95,19 +95,19 @@ const slides = [
           <div className="w-14 h-14 rounded-2xl bg-[#A6CE39]/15 flex items-center justify-center">
             <Lightbulb className="w-7 h-7 text-[#A6CE39]" />
           </div>
-          <h2 className="text-5xl font-bold text-[#2a1020]">La Solution : CITZEN</h2>
+          <h2 className="text-5xl font-bold text-[#2a1020]">The Solution: CITZEN</h2>
         </div>
         <p className="text-2xl text-[#2a1020]/60 mb-10 max-w-4xl">
-          Une plateforme numérique unifiée qui centralise la coordination, le suivi et la communication du réseau des Ambassadeurs Citoyens.
+          A unified digital platform that centralizes coordination, tracking and communication for the Citizen Ambassadors network.
         </p>
         <div className="flex-1 grid grid-cols-3 gap-6">
           {[
-            { icon: "🔗", title: "Hub Social", desc: "Fil d'actualité, partage de projets et communication en temps réel entre ambassadeurs" },
-            { icon: "📊", title: "Tableau de bord", desc: "Suivi des activités, points de gamification, tâches et indicateurs personnalisés" },
-            { icon: "🗺️", title: "Carte territoriale", desc: "Visualisation des 12 régions avec ambassadeurs, projets et impact par territoire" },
-            { icon: "📝", title: "Rapports d'activité", desc: "Soumission structurée des rapports avec workflow de validation mentor/admin" },
-            { icon: "🎓", title: "Ressources & Formation", desc: "Bibliothèque de guides, formations et opportunités pour le développement des compétences" },
-            { icon: "🏆", title: "Gamification", desc: "Système de points, badges et reconnaissance pour motiver l'engagement citoyen" },
+            { icon: "🔗", title: "Social Hub", desc: "News feed, project sharing and real-time communication between ambassadors" },
+            { icon: "📊", title: "Dashboard", desc: "Activity tracking, gamification points, tasks and personalized indicators" },
+            { icon: "🗺️", title: "Territorial Map", desc: "Visualization of 12 regions with ambassadors, projects and impact by territory" },
+            { icon: "📝", title: "Activity Reports", desc: "Structured report submission with mentor/admin validation workflow" },
+            { icon: "🎓", title: "Resources & Training", desc: "Library of guides, training and opportunities for skills development" },
+            { icon: "🏆", title: "Gamification", desc: "Points system, badges and recognition to motivate civic engagement" },
           ].map((item, i) => (
             <div key={i} className="rounded-2xl border border-[#722D50]/10 bg-white p-8 space-y-4 shadow-sm">
               <span className="text-4xl">{item.icon}</span>
@@ -128,14 +128,14 @@ const slides = [
           <div className="w-14 h-14 rounded-2xl bg-[#A6CE39]/15 flex items-center justify-center">
             <Target className="w-7 h-7 text-[#A6CE39]" />
           </div>
-          <h2 className="text-5xl font-bold">Proposition de valeur</h2>
+          <h2 className="text-5xl font-bold">Value Proposition</h2>
         </div>
         <div className="flex-1 grid grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             {[
-              { title: "Pour les Ambassadeurs", desc: "Un espace personnel pour suivre leur impact, se connecter avec le réseau et accéder aux opportunités de développement.", color: "#A6CE39" },
-              { title: "Pour les Mentors", desc: "Un tableau de validation des rapports et un suivi direct des mentorés pour un accompagnement efficace.", color: "#A6CE39" },
-              { title: "Pour les Administrateurs", desc: "Une vue macro du réseau avec analytics, gestion des utilisateurs et pilotage stratégique du programme.", color: "#A6CE39" },
+              { title: "For Ambassadors", desc: "A personal space to track their impact, connect with the network and access development opportunities.", color: "#A6CE39" },
+              { title: "For Mentors", desc: "A report validation dashboard and direct mentee tracking for effective support.", color: "#A6CE39" },
+              { title: "For Administrators", desc: "A macro view of the network with analytics, user management and strategic program steering.", color: "#A6CE39" },
             ].map((item, i) => (
               <div key={i} className="flex gap-5">
                 <div className="w-1.5 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
@@ -148,9 +148,9 @@ const slides = [
           </div>
           <div className="flex flex-col items-center justify-center text-center space-y-8">
             <div className="text-8xl font-black text-[#A6CE39]">3</div>
-            <p className="text-3xl font-light text-white/70">Rôles, un seul écosystème</p>
+            <p className="text-3xl font-light text-white/70">Roles, one ecosystem</p>
             <div className="flex gap-4">
-              {["Agir", "Valider", "Piloter"].map((role, i) => (
+              {["Act", "Validate", "Pilot"].map((role, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <span className="px-5 py-3 rounded-full bg-[#A6CE39]/15 text-[#A6CE39] text-lg font-semibold">{role}</span>
                   {i < 2 && <ArrowRight className="w-5 h-5 text-white/30" />}
@@ -171,21 +171,21 @@ const slides = [
           <div className="w-14 h-14 rounded-2xl bg-[#722D50]/10 flex items-center justify-center">
             <Users className="w-7 h-7 text-[#722D50]" />
           </div>
-          <h2 className="text-5xl font-bold text-[#2a1020]">Fonctionnalités par rôle</h2>
+          <h2 className="text-5xl font-bold text-[#2a1020]">Features by Role</h2>
         </div>
         <div className="flex-1 grid grid-cols-3 gap-8">
           {[
             {
-              role: "Ambassadeur", color: "#A6CE39", emoji: "🌱",
-              features: ["Dashboard personnalisé", "Hub social & fil d'actualité", "Annuaire du réseau", "Inscription aux événements", "Soumission de rapports", "Gamification & badges", "Bibliothèque de ressources"]
+              role: "Ambassador", color: "#A6CE39", emoji: "🌱",
+              features: ["Personalized dashboard", "Social hub & news feed", "Network directory", "Event registration", "Report submission", "Gamification & badges", "Resource library"]
             },
             {
               role: "Mentor", color: "#722D50", emoji: "🎓",
-              features: ["Validation des rapports", "Suivi des mentorés", "Commentaires & feedback", "Vue des activités régionales", "Historique des validations"]
+              features: ["Report validation", "Mentee tracking", "Comments & feedback", "Regional activity view", "Validation history"]
             },
             {
-              role: "Administrateur", color: "#2a1020", emoji: "⚙️",
-              features: ["Dashboard macro & KPIs", "Gestion des ambassadeurs", "Gestion des mentors", "Analytics & graphiques", "Impact territorial (carte)", "Gestion des événements", "Annonces & communication", "Paramètres système"]
+              role: "Administrator", color: "#2a1020", emoji: "⚙️",
+              features: ["Macro dashboard & KPIs", "Ambassador management", "Mentor management", "Analytics & charts", "Territorial impact (map)", "Event management", "Announcements & communication", "System settings"]
             },
           ].map((item, i) => (
             <div key={i} className="rounded-2xl border-2 p-8 space-y-5" style={{ borderColor: `${item.color}30` }}>
@@ -216,14 +216,14 @@ const slides = [
           <div className="w-14 h-14 rounded-2xl bg-[#A6CE39]/15 flex items-center justify-center">
             <TrendingUp className="w-7 h-7 text-[#A6CE39]" />
           </div>
-          <h2 className="text-5xl font-bold text-[#2a1020]">Impact & Chiffres clés</h2>
+          <h2 className="text-5xl font-bold text-[#2a1020]">Impact & Key Figures</h2>
         </div>
         <div className="flex-1 grid grid-cols-4 gap-6 mb-10">
           {[
-            { value: "188", label: "Ambassadeurs citoyens", icon: Users },
-            { value: "12", label: "Régions couvertes", icon: MapPin },
-            { value: "38", label: "Projets réalisés", icon: Layers },
-            { value: "12 500+", label: "Bénéficiaires directs", icon: TrendingUp },
+            { value: "188", label: "Citizen Ambassadors", icon: Users },
+            { value: "12", label: "Regions Covered", icon: MapPin },
+            { value: "38", label: "Projects Completed", icon: Layers },
+            { value: "12,500+", label: "Direct Beneficiaries", icon: TrendingUp },
           ].map((stat, i) => (
             <div key={i} className="rounded-2xl bg-white border border-[#722D50]/10 p-8 text-center space-y-4 shadow-sm">
               <stat.icon className="w-8 h-8 text-[#A6CE39] mx-auto" />
@@ -234,9 +234,9 @@ const slides = [
         </div>
         <div className="grid grid-cols-3 gap-6">
           {[
-            { title: "Éducation civique", desc: "Sensibilisation et engagement des jeunes dans les territoires" },
-            { title: "Capacitation citoyenne", desc: "Renforcement des capacités des citoyens pour participer aux décisions" },
-            { title: "Appui aux coopératives", desc: "Accompagnement des initiatives locales et coopératives" },
+            { title: "Civic Education", desc: "Youth awareness and engagement across territories" },
+            { title: "Citizen Empowerment", desc: "Strengthening citizens' capacity to participate in decision-making" },
+            { title: "Cooperative Support", desc: "Supporting local initiatives and cooperatives" },
           ].map((item, i) => (
             <div key={i} className="rounded-xl bg-[#A6CE39]/10 p-6 space-y-2">
               <h4 className="text-lg font-bold text-[#2a1020]">{item.title}</h4>
@@ -261,11 +261,11 @@ const slides = [
         <div className="flex-1 grid grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             {[
-              { layer: "Frontend", tech: "React + TypeScript + Tailwind CSS", detail: "Application mobile-first, responsive, PWA-ready" },
-              { layer: "UI Framework", tech: "shadcn/ui + Radix UI", detail: "Composants accessibles et design system cohérent" },
-              { layer: "Backend", tech: "Lovable Cloud (Supabase)", detail: "Base de données PostgreSQL, Auth, Edge Functions, Storage" },
-              { layer: "Temps réel", tech: "Supabase Realtime", detail: "Notifications et mises à jour instantanées" },
-              { layer: "Visualisation", tech: "Recharts + Carte SVG", detail: "Graphiques analytiques et carte interactive du Maroc" },
+              { layer: "Frontend", tech: "React + TypeScript + Tailwind CSS", detail: "Mobile-first, responsive, PWA-ready application" },
+              { layer: "UI Framework", tech: "shadcn/ui + Radix UI", detail: "Accessible components and cohesive design system" },
+              { layer: "Backend", tech: "Lovable Cloud (Supabase)", detail: "PostgreSQL database, Auth, Edge Functions, Storage" },
+              { layer: "Realtime", tech: "Supabase Realtime", detail: "Instant notifications and live updates" },
+              { layer: "Visualization", tech: "Recharts + SVG Map", detail: "Analytical charts and interactive map of Morocco" },
             ].map((item, i) => (
               <div key={i} className="flex gap-4 items-start">
                 <div className="w-3 h-3 rounded-full bg-[#A6CE39] mt-2 shrink-0" />
@@ -290,14 +290,14 @@ const slides = [
                   </div>
                   <div>
                     <p className="font-bold text-[#2a1020]">{role}</p>
-                    <p className="text-sm text-[#2a1020]/40">{["Agir & Reporter", "Valider & Accompagner", "Piloter & Analyser"][i]}</p>
+                    <p className="text-sm text-[#2a1020]/40">{["Act & Report", "Validate & Support", "Pilot & Analyze"][i]}</p>
                   </div>
                   <ArrowRight className="w-5 h-5 text-[#2a1020]/20 ml-auto" />
                 </div>
               ))}
               <div className="rounded-xl bg-[#A6CE39]/10 border border-[#A6CE39]/20 p-5 text-center">
                 <p className="font-bold text-[#2a1020]">Lovable Cloud</p>
-                <p className="text-sm text-[#2a1020]/40">Base de données · Auth · API · Storage</p>
+                <p className="text-sm text-[#2a1020]/40">Database · Auth · API · Storage</p>
               </div>
             </div>
           </div>
@@ -314,17 +314,17 @@ const slides = [
         <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-[#722D50]/20 blur-[120px]" />
         <div className="relative z-10 text-center px-16 space-y-10">
           <h2 className="text-7xl font-black leading-tight">
-            Prêts à transformer<br />l'engagement citoyen<br />au <span className="text-[#A6CE39]">Maroc</span> ?
+            Ready to transform<br />civic engagement<br />in <span className="text-[#A6CE39]">Morocco</span>?
           </h2>
           <p className="text-2xl text-white/50 max-w-2xl mx-auto leading-relaxed">
-            CITZEN est la brique numérique qui manquait au réseau des Ambassadeurs Citoyens pour passer à l'échelle.
+            CITZEN is the missing digital building block for the Citizen Ambassadors network to scale.
           </p>
           <div className="flex items-center justify-center gap-6 pt-4">
             <div className="px-8 py-4 rounded-full bg-[#A6CE39] text-[#1a1a1a] text-xl font-bold">
-              Demander une démo
+              Request a Demo
             </div>
             <div className="px-8 py-4 rounded-full border-2 border-white/20 text-white text-xl font-medium">
-              En savoir plus
+              Learn More
             </div>
           </div>
           <div className="pt-8">
