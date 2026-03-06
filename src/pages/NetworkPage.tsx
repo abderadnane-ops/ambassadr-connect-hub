@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 
 import { ambassadors, badgeInfo, projects } from "@/data/mock-data";
 import type { Ambassador } from "@/data/mock-data";
+import { ambassadorAvatars } from "@/data/ambassador-avatars";
 import MoroccoMap from "@/components/map/MoroccoMap";
 
 const skillColors = [
@@ -37,9 +38,7 @@ const NetworkPage = () => {
         </button>
 
         <div className="flex flex-col items-center text-center">
-          <div className="w-20 h-20 rounded-full gradient-hero flex items-center justify-center text-white font-display font-bold text-2xl shadow-elevated">
-            {selectedProfile.avatar}
-          </div>
+          <img src={ambassadorAvatars[selectedProfile.id]} alt={selectedProfile.name} className="w-20 h-20 rounded-full object-cover shadow-elevated" />
           <h2 className="font-display font-bold text-lg mt-3">{selectedProfile.name}</h2>
           <p className="text-sm text-muted-foreground">{selectedProfile.role}</p>
           <p className="text-xs text-muted-foreground">{selectedProfile.region}</p>
@@ -163,9 +162,7 @@ const NetworkPage = () => {
                 <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
                   {i + 1}
                 </span>
-                <div className="w-7 h-7 rounded-full gradient-hero flex items-center justify-center text-white text-[10px] font-bold">
-                  {amb.avatar}
-                </div>
+                <img src={ambassadorAvatars[amb.id]} alt={amb.name} className="w-7 h-7 rounded-full object-cover" />
                 <span className="text-sm font-medium flex-1">{amb.name}</span>
                 <span className="text-xs font-bold text-highlight flex items-center gap-1">
                   <Star className="w-3 h-3 fill-highlight" />{amb.points}
@@ -186,9 +183,7 @@ const NetworkPage = () => {
             onClick={() => setSelectedProfile(amb)}
           >
             <CardContent className="p-3 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full gradient-hero flex items-center justify-center text-white font-display font-bold text-sm shrink-0">
-                {amb.avatar}
-              </div>
+              <img src={ambassadorAvatars[amb.id]} alt={amb.name} className="w-10 h-10 rounded-full object-cover shrink-0" />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   <h4 className="font-semibold text-sm">{amb.name}</h4>
