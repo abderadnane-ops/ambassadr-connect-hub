@@ -148,11 +148,6 @@ const LoginPage = () => {
 
 
 
-              {role === "admin" && (
-                <p className="text-[11px] text-muted-foreground text-center">
-                  Accès réservé à l'équipe d'administration du réseau
-                </p>
-              )}
             </form>
 
             <div className="flex items-center gap-3 my-5">
