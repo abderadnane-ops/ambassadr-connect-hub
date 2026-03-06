@@ -63,7 +63,9 @@ const LoginPage = () => {
             className="h-10 mx-auto"
             style={{ filter: "brightness(0) saturate(100%) invert(18%) sepia(30%) saturate(2000%) hue-rotate(290deg)" }}
           />
-          <p className="text-sm text-muted-foreground">Connectez-vous à votre espace ambassadeur</p>
+          <p className="text-sm text-muted-foreground">
+            {role === "admin" ? "Connectez-vous à votre espace administrateur" : "Connectez-vous à votre espace ambassadeur"}
+          </p>
         </div>
 
         <Card className="border-0 shadow-elevated">
@@ -134,47 +136,58 @@ const LoginPage = () => {
 
               <Button type="submit" disabled={loading} className="w-full h-11 rounded-xl font-semibold">
                 <LogIn className="w-4 h-4 mr-2" />
-                {loading ? "Connexion..." : "Se connecter"}
+                {loading ? "Connexion..." : role === "admin" ? "Connexion administrateur" : "Se connecter"}
               </Button>
+              {role === "admin" && (
+                <p className="text-[11px] text-muted-foreground text-center">
+                  Accès réservé à l'équipe d'administration du réseau
+                </p>
+              )}
             </form>
 
-            <div className="flex items-center gap-3 my-5">
-              <Separator className="flex-1" />
-              <span className="text-xs text-muted-foreground whitespace-nowrap">Ou continuer avec</span>
-              <Separator className="flex-1" />
-            </div>
+            {role === "ambassador" && (
+              <>
+                <div className="flex items-center gap-3 my-5">
+                  <Separator className="flex-1" />
+                  <span className="text-xs text-muted-foreground whitespace-nowrap">Ou continuer avec</span>
+                  <Separator className="flex-1" />
+                </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                onClick={() => handleBiometric("face")}
-                className="flex flex-col items-center gap-2 rounded-xl border border-border bg-background p-4 hover:bg-accent transition-colors"
-              >
-                <ScanFace className="w-6 h-6 text-primary" />
-                <span className="text-xs font-medium text-foreground">Reconnaissance faciale</span>
-                <span className="text-[10px] text-muted-foreground leading-tight text-center">
-                  Connexion rapide avec reconnaissance faciale.
-                </span>
-              </button>
-              <button
-                onClick={() => handleBiometric("fingerprint")}
-                className="flex flex-col items-center gap-2 rounded-xl border border-border bg-background p-4 hover:bg-accent transition-colors"
-              >
-                <Fingerprint className="w-6 h-6 text-primary" />
-                <span className="text-xs font-medium text-foreground">Empreinte digitale</span>
-                <span className="text-[10px] text-muted-foreground leading-tight text-center">
-                  Connexion rapide avec empreinte digitale.
-                </span>
-              </button>
-            </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => handleBiometric("face")}
+                    className="flex flex-col items-center gap-2 rounded-xl border border-border bg-background p-4 hover:bg-accent transition-colors"
+                  >
+                    <ScanFace className="w-6 h-6 text-primary" />
+                    <span className="text-xs font-medium text-foreground">Reconnaissance faciale</span>
+                    <span className="text-[10px] text-muted-foreground leading-tight text-center">
+                      Connexion rapide avec reconnaissance faciale.
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => handleBiometric("fingerprint")}
+                    className="flex flex-col items-center gap-2 rounded-xl border border-border bg-background p-4 hover:bg-accent transition-colors"
+                  >
+                    <Fingerprint className="w-6 h-6 text-primary" />
+                    <span className="text-xs font-medium text-foreground">Empreinte digitale</span>
+                    <span className="text-[10px] text-muted-foreground leading-tight text-center">
+                      Connexion rapide avec empreinte digitale.
+                    </span>
+                  </button>
+                </div>
+              </>
+            )}
           </CardContent>
         </Card>
 
-        <p className="text-center text-sm text-muted-foreground">
-          Première connexion ?{" "}
-          <Link to="/signup" className="text-primary font-semibold hover:underline">
-            Faire une demande d'accès
-          </Link>
-        </p>
+        {role === "ambassador" && (
+          <p className="text-center text-sm text-muted-foreground">
+            Première connexion ?{" "}
+            <Link to="/signup" className="text-primary font-semibold hover:underline">
+              Faire une demande d'accès
+            </Link>
+          </p>
+        )}
 
         <p className="text-center">
           <Link to="/" className="text-xs text-muted-foreground hover:text-foreground">
