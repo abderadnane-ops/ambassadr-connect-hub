@@ -216,61 +216,43 @@ const slides = [
           <div className="w-14 h-14 rounded-2xl bg-[#A6CE39]/15 flex items-center justify-center">
             <TrendingUp className="w-7 h-7 text-[#A6CE39]" />
           </div>
-          <h2 className="text-5xl font-bold text-[#2a1020]">Impact & Key Figures</h2>
+          <h2 className="text-5xl font-bold text-[#2a1020]">Expected Impact</h2>
         </div>
-        <div className="flex-1 grid grid-cols-2 gap-12 items-start">
-          <div>
-            <h3 className="text-2xl font-bold text-[#722D50] mb-6">Les Citoyens Organization</h3>
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              {[
-                { value: "2018", label: "Year Founded", icon: Shield },
-                { value: "12", label: "Regions Covered", icon: MapPin },
-                { value: "188", label: "Active Ambassadors", icon: Users },
-                { value: "5", label: "Cohorts Trained", icon: Layers },
-              ].map((stat, i) => (
-                <div key={i} className="rounded-2xl bg-white border border-[#722D50]/10 p-6 text-center space-y-3 shadow-sm">
-                  <stat.icon className="w-6 h-6 text-[#A6CE39] mx-auto" />
-                  <p className="text-4xl font-black text-[#722D50]">{stat.value}</p>
-                  <p className="text-sm text-[#2a1020]/50 font-medium">{stat.label}</p>
+        <p className="text-2xl text-[#2a1020]/60 mb-10 max-w-4xl">
+          What CITZEN will change for the network and its stakeholders
+        </p>
+        <div className="flex-1 grid grid-cols-2 gap-10 items-start">
+          <div className="space-y-5">
+            {[
+              { icon: "⚡", title: "80% faster coordination", desc: "Replace fragmented WhatsApp/email chains with a single real-time hub — reducing response time from days to minutes." },
+              { icon: "📊", title: "100% report digitization", desc: "Move from Excel spreadsheets to structured digital reports with automated validation workflows." },
+              { icon: "🔍", title: "Full impact visibility", desc: "Real-time dashboards and territorial maps give administrators instant insight into network-wide performance." },
+              { icon: "🧠", title: "Zero institutional memory loss", desc: "All activities, reports and communications are stored and searchable — nothing is lost when members rotate." },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-4 items-start rounded-2xl bg-white border border-[#722D50]/10 p-6 shadow-sm">
+                <span className="text-3xl shrink-0">{item.icon}</span>
+                <div>
+                  <h3 className="text-xl font-bold text-[#2a1020] mb-1">{item.title}</h3>
+                  <p className="text-base text-[#2a1020]/50 leading-relaxed">{item.desc}</p>
                 </div>
-              ))}
-            </div>
-            <div className="rounded-xl bg-[#A6CE39]/10 p-5 space-y-2">
-              <h4 className="text-lg font-bold text-[#2a1020]">Mission</h4>
-              <p className="text-sm text-[#2a1020]/50">Empowering young Moroccans to become active citizens who drive positive change in their communities through civic engagement and local action.</p>
-            </div>
+              </div>
+            ))}
           </div>
-          <div>
-            <h3 className="text-2xl font-bold text-[#A6CE39] mb-6">Platform Users</h3>
-            <div className="space-y-4 mb-8">
-              {[
-                { role: "Ambassadors", count: "188", desc: "Young citizens trained to lead civic projects in their regions", emoji: "🌱" },
-                { role: "Mentors", count: "24", desc: "Experienced guides who validate reports and support ambassadors", emoji: "🎓" },
-                { role: "Administrators", count: "6", desc: "Program coordinators who manage the network and analyze impact", emoji: "⚙️" },
-              ].map((user, i) => (
-                <div key={i} className="rounded-2xl bg-white border border-[#722D50]/10 p-5 flex items-center gap-4 shadow-sm">
-                  <span className="text-3xl">{user.emoji}</span>
-                  <div className="flex-1">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-xl font-bold text-[#2a1020]">{user.role}</span>
-                      <span className="text-2xl font-black text-[#722D50]">{user.count}</span>
-                    </div>
-                    <p className="text-sm text-[#2a1020]/50">{user.desc}</p>
-                  </div>
+          <div className="space-y-5">
+            {[
+              { icon: "🎯", title: "Data-driven decisions", desc: "Analytics and KPIs enable program leaders to allocate resources where they matter most across 12 regions." },
+              { icon: "🤝", title: "Stronger mentor-ambassador bonds", desc: "Dedicated validation and feedback tools replace informal check-ins with a structured support system." },
+              { icon: "🏆", title: "3× higher engagement", desc: "Gamification, badges and recognition systems motivate sustained civic participation beyond initial training." },
+              { icon: "📈", title: "Scalable to 1,000+ members", desc: "A digital-first infrastructure that grows with the network — ready for new cohorts, regions and partnerships." },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-4 items-start rounded-2xl bg-white border border-[#722D50]/10 p-6 shadow-sm">
+                <span className="text-3xl shrink-0">{item.icon}</span>
+                <div>
+                  <h3 className="text-xl font-bold text-[#2a1020] mb-1">{item.title}</h3>
+                  <p className="text-base text-[#2a1020]/50 leading-relaxed">{item.desc}</p>
                 </div>
-              ))}
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { value: "12,500+", label: "Direct Beneficiaries" },
-                { value: "38", label: "Projects Completed" },
-              ].map((stat, i) => (
-                <div key={i} className="rounded-xl bg-[#722D50]/5 p-5 text-center space-y-2">
-                  <p className="text-3xl font-black text-[#722D50]">{stat.value}</p>
-                  <p className="text-sm text-[#2a1020]/50 font-medium">{stat.label}</p>
-                </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
