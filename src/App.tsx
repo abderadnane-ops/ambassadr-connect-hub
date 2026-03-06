@@ -17,6 +17,7 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
+import EventDetailPage from "./pages/EventDetailPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App = () => (
           <Route element={<AppLayout><EventApplicationPage /></AppLayout>} path="/event-application" />
           <Route element={<AppLayout><EventReportPage /></AppLayout>} path="/event-report" />
           <Route element={<AppLayout><MentorValidationPage /></AppLayout>} path="/validation" />
+          <Route element={<AppLayout><EventDetailPage /></AppLayout>} path="/event/:id" />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
