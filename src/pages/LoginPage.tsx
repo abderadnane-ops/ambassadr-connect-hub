@@ -72,7 +72,11 @@ const LoginPage = () => {
               {/* Role Selector */}
               <div className="space-y-2">
                 <Label className="text-xs text-muted-foreground">Choisir votre accès</Label>
-                <div className="grid grid-cols-2 gap-2 p-1 rounded-xl bg-muted/50">
+                <div className="relative grid grid-cols-2 p-1 rounded-xl bg-muted/60 border border-border/40">
+                  <div
+                    className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg bg-primary shadow-sm transition-transform duration-200 ease-out"
+                    style={{ transform: role === "ambassador" ? "translateX(4px)" : "translateX(calc(100% + 4px))" }}
+                  />
                   {([
                     { value: "ambassador" as Role, icon: Users, label: "Ambassadeur" },
                     { value: "admin" as Role, icon: ShieldCheck, label: "Admin" },
@@ -82,9 +86,9 @@ const LoginPage = () => {
                       type="button"
                       onClick={() => setRole(opt.value)}
                       className={cn(
-                        "flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all",
+                        "relative z-10 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200",
                         role === opt.value
-                          ? "bg-primary text-primary-foreground shadow-sm"
+                          ? "text-primary-foreground"
                           : "text-muted-foreground hover:text-foreground"
                       )}
                     >
