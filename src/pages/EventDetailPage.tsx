@@ -10,12 +10,6 @@ import { toast } from "@/hooks/use-toast";
 import sommetCitoyenGroup from "@/assets/events/sommet-citoyen-group.jpeg";
 import labCitoyensOujda from "@/assets/events/lab-citoyens-oujda.jpeg";
 import ambassadeursCitoyens from "@/assets/events/ambassadeurs-citoyens.png";
-import { Calendar, Clock, MapPin, Users, ChevronLeft, CalendarPlus, CheckCircle, Loader2, Ban } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { toast } from "@/hooks/use-toast";
 
 export type ParticipationStatus = "participer" | "en_attente" | "confirme" | "complet";
 
