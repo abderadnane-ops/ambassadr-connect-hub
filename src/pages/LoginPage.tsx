@@ -67,7 +67,7 @@ const LoginPage = () => {
             {role === "admin" ? "Connectez-vous à votre espace administrateur" : "Connectez-vous à votre espace ambassadeur"}
           </p>
           <p className="text-[11px] text-muted-foreground/70">
-            Accès réservé aux Ambassadeurs Citoyens du réseau Les Citoyens
+            {role === "admin" ? "Accès réservé à l'équipe d'administration du réseau Les Citoyens" : "Accès réservé aux Ambassadeurs Citoyens du réseau Les Citoyens"}
           </p>
         </div>
 
