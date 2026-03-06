@@ -26,7 +26,7 @@ const slides = [
             CIT<span className="text-[#A6CE39]">I</span>ZEN
           </h1>
           <p className="text-3xl font-light text-white/70 max-w-3xl mx-auto leading-relaxed mb-6">
-            La plateforme numérique du réseau des Ambassadeurs Citoyens du Maroc
+            The digital platform for Morocco's Citizen Ambassadors network
           </p>
           <div className="w-24 h-1 bg-[#A6CE39] mx-auto rounded-full mb-6" />
           <p className="text-lg text-white/40 italic">
@@ -45,12 +45,12 @@ const slides = [
           <div className="w-14 h-14 rounded-2xl bg-red-500/10 flex items-center justify-center">
             <AlertTriangle className="w-7 h-7 text-red-500" />
           </div>
-          <h2 className="text-5xl font-bold text-[#2a1020]">Le Problème</h2>
+          <h2 className="text-5xl font-bold text-[#2a1020]">The Problem</h2>
         </div>
         <div className="flex-1 grid grid-cols-2 gap-8">
           <div className="space-y-6">
             <p className="text-2xl text-[#2a1020]/70 leading-relaxed">
-              188 ambassadeurs citoyens répartis dans 12 régions du Maroc coordonnent leurs actions via des canaux fragmentés et inadaptés.
+              188 citizen ambassadors spread across 12 regions of Morocco coordinate their actions through fragmented and inadequate channels.
             </p>
             <div className="space-y-4">
               {[
