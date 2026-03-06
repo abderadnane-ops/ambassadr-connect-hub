@@ -1,12 +1,13 @@
-import { Home, Briefcase, Users, MessageCircle } from "lucide-react";
+import { Home, Briefcase, Users, MessageCircle, User } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const tabs = [
   { path: "/", icon: Home, label: "Accueil" },
+  { path: "/hub", icon: MessageCircle, label: "Hub", badge: 19 },
   { path: "/network", icon: Users, label: "Réseau" },
   { path: "/resources", icon: Briefcase, label: "Ressources" },
-  { path: "/hub", icon: MessageCircle, label: "Hub", badge: 19 },
+  { path: "/profile", icon: User, label: "Profil" },
 ];
 
 const BottomNav = () => {
