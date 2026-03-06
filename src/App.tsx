@@ -22,12 +22,15 @@ import NotFound from "./pages/NotFound";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 import AdminAmbassadorsPage from "./pages/admin/AdminAmbassadorsPage";
+import AdminMentorsPage from "./pages/admin/AdminMentorsPage";
+import AdminRolesPage from "./pages/admin/AdminRolesPage";
 import AdminValidationsPage from "./pages/admin/AdminValidationsPage";
-import AdminEventsPage from "./pages/admin/AdminEventsPage";
 import AdminReportsPage from "./pages/admin/AdminReportsPage";
-import AdminOpportunitiesPage from "./pages/admin/AdminOpportunitiesPage";
-import AdminCommunicationsPage from "./pages/admin/AdminCommunicationsPage";
-import AdminRegionsPage from "./pages/admin/AdminRegionsPage";
+import AdminImpactPage from "./pages/admin/AdminImpactPage";
+import AdminEventsPage from "./pages/admin/AdminEventsPage";
+import AdminResourcesPage from "./pages/admin/AdminResourcesPage";
+import AdminAnnouncementsPage from "./pages/admin/AdminAnnouncementsPage";
+import AdminRecognitionPage from "./pages/admin/AdminRecognitionPage";
 import AdminAnalyticsPage from "./pages/admin/AdminAnalyticsPage";
 import AdminSettingsPage from "./pages/admin/AdminSettingsPage";
 
@@ -58,12 +61,15 @@ const App = () => (
           {/* Admin routes */}
           <Route path="/admin/dashboard" element={<AdminLayout><AdminDashboardPage /></AdminLayout>} />
           <Route path="/admin/ambassadors" element={<AdminLayout><AdminAmbassadorsPage /></AdminLayout>} />
+          <Route path="/admin/mentors" element={<AdminLayout><AdminMentorsPage /></AdminLayout>} />
+          <Route path="/admin/roles" element={<AdminLayout><AdminRolesPage /></AdminLayout>} />
           <Route path="/admin/validations" element={<AdminLayout><AdminValidationsPage /></AdminLayout>} />
-          <Route path="/admin/events" element={<AdminLayout><AdminEventsPage /></AdminLayout>} />
           <Route path="/admin/reports" element={<AdminLayout><AdminReportsPage /></AdminLayout>} />
-          <Route path="/admin/opportunities" element={<AdminLayout><AdminOpportunitiesPage /></AdminLayout>} />
-          <Route path="/admin/communications" element={<AdminLayout><AdminCommunicationsPage /></AdminLayout>} />
-          <Route path="/admin/regions" element={<AdminLayout><AdminRegionsPage /></AdminLayout>} />
+          <Route path="/admin/impact" element={<AdminLayout><AdminImpactPage /></AdminLayout>} />
+          <Route path="/admin/events" element={<AdminLayout><AdminEventsPage /></AdminLayout>} />
+          <Route path="/admin/resources" element={<AdminLayout><AdminResourcesPage /></AdminLayout>} />
+          <Route path="/admin/announcements" element={<AdminLayout><AdminAnnouncementsPage /></AdminLayout>} />
+          <Route path="/admin/recognition" element={<AdminLayout><AdminRecognitionPage /></AdminLayout>} />
           <Route path="/admin/analytics" element={<AdminLayout><AdminAnalyticsPage /></AdminLayout>} />
           <Route path="/admin/settings" element={<AdminLayout><AdminSettingsPage /></AdminLayout>} />
 
