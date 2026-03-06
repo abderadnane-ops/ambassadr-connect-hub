@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "@/components/layout/AppLayout";
-import MentorRouteGuard from "@/components/layout/MentorRouteGuard";
 import Dashboard from "./pages/Dashboard";
 import NetworkPage from "./pages/NetworkPage";
 import ResourcesPage from "./pages/ResourcesPage";
@@ -13,12 +12,7 @@ import OnboardingPage from "./pages/OnboardingPage";
 import EventApplicationPage from "./pages/EventApplicationPage";
 import EventReportPage from "./pages/EventReportPage";
 import ProfilePage from "./pages/ProfilePage";
-import MentorValidationPage from "./pages/MentorValidationPage";
-import MenteesPage from "./pages/MenteesPage";
-import ValidationHistoryPage from "./pages/ValidationHistoryPage";
-import RegionalActivityPage from "./pages/RegionalActivityPage";
 import LandingPage from "./pages/LandingPage";
-import { MentorProvider } from "./hooks/use-mentor";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
@@ -45,7 +39,6 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <MentorProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -62,10 +55,6 @@ const App = () => (
           <Route element={<AppLayout><OnboardingPage /></AppLayout>} path="/onboarding" />
           <Route element={<AppLayout><EventApplicationPage /></AppLayout>} path="/event-application" />
           <Route element={<AppLayout><EventReportPage /></AppLayout>} path="/event-report" />
-          <Route element={<AppLayout><MentorRouteGuard><MentorValidationPage /></MentorRouteGuard></AppLayout>} path="/validation" />
-          <Route element={<AppLayout><MentorRouteGuard><MenteesPage /></MentorRouteGuard></AppLayout>} path="/mentees" />
-          <Route element={<AppLayout><MentorRouteGuard><ValidationHistoryPage /></MentorRouteGuard></AppLayout>} path="/validation-history" />
-          <Route element={<AppLayout><MentorRouteGuard><RegionalActivityPage /></MentorRouteGuard></AppLayout>} path="/regional-activity" />
           <Route element={<AppLayout><EventDetailPage /></AppLayout>} path="/event/:id" />
 
           {/* Admin routes */}
@@ -87,7 +76,6 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-      </MentorProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

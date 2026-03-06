@@ -154,19 +154,6 @@ const LoginPage = () => {
                 Accès démo {role === "admin" ? "Admin" : "Ambassadeur"}
               </Button>
 
-              {role === "ambassador" && (
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => {
-                    localStorage.setItem("demo_role", "mentor");
-                    window.location.href = "/dashboard";
-                  }}
-                  className="w-full h-11 rounded-xl font-semibold border-accent text-accent hover:bg-accent/10"
-                >
-                  Accès démo Mentor
-                </Button>
-              )}
 
               {role === "admin" && (
                 <p className="text-[11px] text-muted-foreground text-center">
