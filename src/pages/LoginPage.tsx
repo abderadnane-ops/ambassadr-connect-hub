@@ -146,8 +146,8 @@ const LoginPage = () => {
                 type="button"
                 variant="outline"
                 onClick={() => {
-                  localStorage.setItem("demo_role", "ambassador");
-                  navigate(role === "admin" ? "/admin/dashboard" : "/dashboard");
+                  localStorage.setItem("demo_role", role === "admin" ? "admin" : "ambassador");
+                  window.location.href = role === "admin" ? "/admin/dashboard" : "/dashboard";
                 }}
                 className={cn("w-full h-11 rounded-xl font-semibold", role === "admin" && "border-[#A6CE39] text-[#A6CE39] hover:bg-[#A6CE39]/10")}
               >
@@ -160,7 +160,7 @@ const LoginPage = () => {
                   variant="outline"
                   onClick={() => {
                     localStorage.setItem("demo_role", "mentor");
-                    navigate("/dashboard");
+                    window.location.href = "/dashboard";
                   }}
                   className="w-full h-11 rounded-xl font-semibold border-accent text-accent hover:bg-accent/10"
                 >
