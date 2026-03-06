@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import {
-  AlertTriangle, ArrowRight, ChevronRight, Calendar, Target,
-  Flame, Coffee, FileText, Briefcase, Clock, MapPin, CheckCircle, Bell
+  AlertTriangle, ChevronRight, Calendar, Target,
+  Coffee, FileText, Briefcase, Clock, MapPin, Bell
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { announcements, opportunities } from "@/data/mock-data";
+import DashboardHero from "@/components/dashboard/DashboardHero";
 
 const myProfile = {
   name: "Amina",
@@ -62,17 +62,8 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-5 px-4 py-4">
-      {/* Welcome + Streak */}
-      <div className="flex items-center justify-between animate-fade-in">
-        <div>
-          <p className="text-sm text-muted-foreground">Bonjour, {myProfile.name} 👋</p>
-          <h1 className="font-display text-xl font-bold">Tableau de bord</h1>
-        </div>
-        <div className="flex items-center gap-1 bg-highlight/15 rounded-full px-3 py-1.5">
-          <Flame className="w-4 h-4 text-highlight" />
-          <span className="text-xs font-bold text-highlight">{myProfile.streak}j</span>
-        </div>
-      </div>
+      {/* Hero Welcome */}
+      <DashboardHero />
 
       {/* Urgent Announcement */}
       {urgentAnnouncement && (
