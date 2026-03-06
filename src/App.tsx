@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "@/components/layout/AppLayout";
+import MentorRouteGuard from "@/components/layout/MentorRouteGuard";
 import Dashboard from "./pages/Dashboard";
 import NetworkPage from "./pages/NetworkPage";
 import ResourcesPage from "./pages/ResourcesPage";
@@ -61,10 +62,10 @@ const App = () => (
           <Route element={<AppLayout><OnboardingPage /></AppLayout>} path="/onboarding" />
           <Route element={<AppLayout><EventApplicationPage /></AppLayout>} path="/event-application" />
           <Route element={<AppLayout><EventReportPage /></AppLayout>} path="/event-report" />
-          <Route element={<AppLayout><MentorValidationPage /></AppLayout>} path="/validation" />
-          <Route element={<AppLayout><MenteesPage /></AppLayout>} path="/mentees" />
-          <Route element={<AppLayout><ValidationHistoryPage /></AppLayout>} path="/validation-history" />
-          <Route element={<AppLayout><RegionalActivityPage /></AppLayout>} path="/regional-activity" />
+          <Route element={<AppLayout><MentorRouteGuard><MentorValidationPage /></MentorRouteGuard></AppLayout>} path="/validation" />
+          <Route element={<AppLayout><MentorRouteGuard><MenteesPage /></MentorRouteGuard></AppLayout>} path="/mentees" />
+          <Route element={<AppLayout><MentorRouteGuard><ValidationHistoryPage /></MentorRouteGuard></AppLayout>} path="/validation-history" />
+          <Route element={<AppLayout><MentorRouteGuard><RegionalActivityPage /></MentorRouteGuard></AppLayout>} path="/regional-activity" />
           <Route element={<AppLayout><EventDetailPage /></AppLayout>} path="/event/:id" />
 
           {/* Admin routes */}
