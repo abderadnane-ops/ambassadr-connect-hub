@@ -14,12 +14,10 @@ import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
 import logoLight from "@/assets/citizin-logo.png";
-import AdminBottomNav from "./AdminBottomNav";
 
 const navGroups = [
   {
@@ -75,7 +73,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full">
-        <Sidebar collapsible="icon">
+        <Sidebar collapsible="offcanvas">
           <SidebarHeader className="p-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shrink-0">
@@ -143,7 +141,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         </Sidebar>
 
         <div className="flex-1 flex flex-col min-w-0">
-          {/* Enhanced Top Bar */}
           <header className="h-14 border-b border-border flex items-center px-4 gap-3 bg-card shrink-0">
             <SidebarTrigger />
             <Separator orientation="vertical" className="h-6" />
@@ -153,7 +150,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
             <div className="flex-1" />
 
-            {/* Search */}
             {searchOpen ? (
               <div className="flex-1 max-w-xs animate-fade-in">
                 <Input
@@ -169,13 +165,11 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
               </button>
             )}
 
-            {/* Notifications */}
             <button className="p-2 rounded-lg hover:bg-muted transition-colors relative">
               <Bell className="w-4 h-4 text-muted-foreground" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-highlight rounded-full" />
             </button>
 
-            {/* Admin Avatar Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button className="flex items-center gap-2 rounded-lg hover:bg-muted px-2 py-1 transition-colors">
@@ -203,11 +197,10 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             </DropdownMenu>
           </header>
 
-          <main className="flex-1 overflow-auto bg-background p-6 pb-24 lg:pb-6">
+          <main className="flex-1 overflow-auto bg-background p-6">
             {children}
           </main>
         </div>
-        <AdminBottomNav />
       </div>
     </SidebarProvider>
   );
