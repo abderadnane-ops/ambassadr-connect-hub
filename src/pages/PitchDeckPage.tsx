@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Maximize2, Minimize2, Users, AlertTriangle, Lightbulb, Target, Shield, TrendingUp, MapPin, Layers, ArrowRight } from "lucide-react";
-import citizinLogo from "@/assets/citizin-logo.png";
+
 
 const slides = [
   // Slide 1: Title
