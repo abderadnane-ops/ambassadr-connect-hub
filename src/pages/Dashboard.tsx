@@ -12,6 +12,7 @@ import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { announcements, opportunities } from "@/data/mock-data";
 import DashboardHero from "@/components/dashboard/DashboardHero";
+import MentorDashboardWidget from "@/components/dashboard/MentorDashboardWidget";
 import { eventsData, type ParticipationStatus } from "@/pages/EventDetailPage";
 import { toast } from "@/hooks/use-toast";
 
@@ -104,6 +105,9 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       )}
+
+      {/* Mentor Widget */}
+      <MentorDashboardWidget />
 
       {/* Quick Actions */}
       <div className="grid grid-cols-2 gap-3 animate-fade-in" style={{ animationDelay: "0.08s", opacity: 0 }}>
