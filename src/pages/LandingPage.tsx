@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
 import citizinLogo from "@/assets/citizin-logo.png";
+import ConnexionMenu from "@/components/landing/ConnexionMenu";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -16,12 +17,13 @@ const LandingPage = () => {
           <img src={citizinLogo} alt="CITZEN" className="h-8 w-auto" style={{ filter: "brightness(0) saturate(100%) invert(18%) sepia(30%) saturate(2000%) hue-rotate(290deg)" }} />
           <div className="flex items-center gap-3">
             <span className="hidden sm:inline text-xs text-[#722D50]/50 tracking-wide font-medium">Accès réservé aux membres</span>
-            <Button
-              onClick={() => navigate("/login")}
-              className="bg-[#722D50] text-white hover:bg-[#5a2240] font-semibold text-sm px-5 h-9 rounded-full shadow-[0_4px_15px_rgba(114,45,80,0.25)]"
-            >
-              Connexion
-            </Button>
+            <ConnexionMenu>
+              <Button
+                className="bg-[#722D50] text-white hover:bg-[#5a2240] font-semibold text-sm px-5 h-9 rounded-full shadow-[0_4px_15px_rgba(114,45,80,0.25)]"
+              >
+                Connexion
+              </Button>
+            </ConnexionMenu>
           </div>
         </div>
       </header>
@@ -60,13 +62,14 @@ const LandingPage = () => {
               Une initiative du mouvement <span className="text-[#A6CE39] font-semibold">Les Citoyens</span><br />Mieux vivre ensemble
             </p>
 
-            <Button
-              onClick={() => navigate("/login")}
-              size="lg"
-              className="bg-[#A6CE39] text-[#1a1a1a] hover:bg-[#95ba30] font-bold text-base px-12 h-13 rounded-full shadow-[0_6px_25px_rgba(166,206,57,0.35)] hover:shadow-[0_8px_35px_rgba(166,206,57,0.5)] transition-all duration-300 mb-4"
-            >
-              Connexion
-            </Button>
+            <ConnexionMenu>
+              <Button
+                size="lg"
+                className="bg-[#A6CE39] text-[#1a1a1a] hover:bg-[#95ba30] font-bold text-base px-12 h-13 rounded-full shadow-[0_6px_25px_rgba(166,206,57,0.35)] hover:shadow-[0_8px_35px_rgba(166,206,57,0.5)] transition-all duration-300 mb-4"
+              >
+                Connexion
+              </Button>
+            </ConnexionMenu>
             <p className="text-xs text-white/40">
               Accès réservé aux Ambassadeurs Citoyens, Mentors et Administrateurs
             </p>
