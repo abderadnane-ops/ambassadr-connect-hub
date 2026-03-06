@@ -12,6 +12,7 @@ import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { announcements, opportunities } from "@/data/mock-data";
 import DashboardHero from "@/components/dashboard/DashboardHero";
+import MentorDashboardWidget from "@/components/dashboard/MentorDashboardWidget";
 import { eventsData, type ParticipationStatus } from "@/pages/EventDetailPage";
 import { toast } from "@/hooks/use-toast";
 
