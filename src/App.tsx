@@ -74,6 +74,7 @@ const App = () => (
           <Route path="/admin/analytics" element={<AdminLayout><AdminAnalyticsPage /></AdminLayout>} />
           <Route path="/admin/settings" element={<AdminLayout><AdminSettingsPage /></AdminLayout>} />
 
+          <Route path="/pitch" element={<PitchDeckPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
