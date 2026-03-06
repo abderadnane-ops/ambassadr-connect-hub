@@ -1,4 +1,4 @@
-import { Star, Trophy, FolderOpen, MapPin, Award, ChevronRight, Settings, LogOut, Coffee, FileText, Activity, Heart, Clock, Target, TrendingUp, BarChart3, Flame } from "lucide-react";
+import { Star, Trophy, FolderOpen, MapPin, Award, ChevronRight, Settings, LogOut, Coffee, FileText, Activity, Heart, Clock, Target, TrendingUp, BarChart3, Flame, ClipboardCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -53,6 +53,7 @@ const achievements = [
 const topAmbassadors = [...ambassadors].sort((a, b) => b.points - a.points).slice(0, 5);
 
 const menuItems = [
+  { label: "Validation mentor", icon: ClipboardCheck, path: "/validation" },
   { label: "Organiser un événement", icon: Coffee, path: "/event-application" },
   { label: "Soumettre un rapport", icon: FileText, path: "/event-report" },
   { label: "Paramètres", icon: Settings, path: "#" },
