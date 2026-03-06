@@ -1,7 +1,7 @@
 import { Search, Bell } from "lucide-react";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import citizinLogo from "@/assets/citizin-logo.png";
+import citizinLogo from "@/assets/citizin-logo-dark.png";
 import NotificationPanel from "./NotificationPanel";
 import LanguageSwitcher from "./LanguageSwitcher";
 

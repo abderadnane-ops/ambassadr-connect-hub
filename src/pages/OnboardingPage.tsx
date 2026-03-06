@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select";
 import { ArrowRight, ArrowLeft, CheckCircle, User, MapPin, Briefcase, Sparkles } from "lucide-react";
 import { regions } from "@/data/mock-data";
-import citizinLogo from "@/assets/citizin-logo.png";
+import citizinLogo from "@/assets/citizin-logo-dark.png";
 
 const availableSkills = [
   "Leadership", "Communication", "Plaidoyer", "Gestion de projet",
