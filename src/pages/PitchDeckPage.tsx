@@ -218,31 +218,60 @@ const slides = [
           </div>
           <h2 className="text-5xl font-bold text-[#2a1020]">Impact & Key Figures</h2>
         </div>
-        <div className="flex-1 grid grid-cols-4 gap-6 mb-10">
-          {[
-            { value: "188", label: "Citizen Ambassadors", icon: Users },
-            { value: "12", label: "Regions Covered", icon: MapPin },
-            { value: "38", label: "Projects Completed", icon: Layers },
-            { value: "12,500+", label: "Direct Beneficiaries", icon: TrendingUp },
-          ].map((stat, i) => (
-            <div key={i} className="rounded-2xl bg-white border border-[#722D50]/10 p-8 text-center space-y-4 shadow-sm">
-              <stat.icon className="w-8 h-8 text-[#A6CE39] mx-auto" />
-              <p className="text-5xl font-black text-[#722D50]">{stat.value}</p>
-              <p className="text-base text-[#2a1020]/50 font-medium">{stat.label}</p>
+        <div className="flex-1 grid grid-cols-2 gap-12 items-start">
+          <div>
+            <h3 className="text-2xl font-bold text-[#722D50] mb-6">Les Citoyens Organization</h3>
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              {[
+                { value: "2018", label: "Year Founded", icon: Shield },
+                { value: "12", label: "Regions Covered", icon: MapPin },
+                { value: "188", label: "Active Ambassadors", icon: Users },
+                { value: "5", label: "Cohorts Trained", icon: Layers },
+              ].map((stat, i) => (
+                <div key={i} className="rounded-2xl bg-white border border-[#722D50]/10 p-6 text-center space-y-3 shadow-sm">
+                  <stat.icon className="w-6 h-6 text-[#A6CE39] mx-auto" />
+                  <p className="text-4xl font-black text-[#722D50]">{stat.value}</p>
+                  <p className="text-sm text-[#2a1020]/50 font-medium">{stat.label}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="grid grid-cols-3 gap-6">
-          {[
-            { title: "Civic Education", desc: "Youth awareness and engagement across territories" },
-            { title: "Citizen Empowerment", desc: "Strengthening citizens' capacity to participate in decision-making" },
-            { title: "Cooperative Support", desc: "Supporting local initiatives and cooperatives" },
-          ].map((item, i) => (
-            <div key={i} className="rounded-xl bg-[#A6CE39]/10 p-6 space-y-2">
-              <h4 className="text-lg font-bold text-[#2a1020]">{item.title}</h4>
-              <p className="text-sm text-[#2a1020]/50">{item.desc}</p>
+            <div className="rounded-xl bg-[#A6CE39]/10 p-5 space-y-2">
+              <h4 className="text-lg font-bold text-[#2a1020]">Mission</h4>
+              <p className="text-sm text-[#2a1020]/50">Empowering young Moroccans to become active citizens who drive positive change in their communities through civic engagement and local action.</p>
             </div>
-          ))}
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold text-[#A6CE39] mb-6">Platform Users</h3>
+            <div className="space-y-4 mb-8">
+              {[
+                { role: "Ambassadors", count: "188", desc: "Young citizens trained to lead civic projects in their regions", emoji: "🌱" },
+                { role: "Mentors", count: "24", desc: "Experienced guides who validate reports and support ambassadors", emoji: "🎓" },
+                { role: "Administrators", count: "6", desc: "Program coordinators who manage the network and analyze impact", emoji: "⚙️" },
+              ].map((user, i) => (
+                <div key={i} className="rounded-2xl bg-white border border-[#722D50]/10 p-5 flex items-center gap-4 shadow-sm">
+                  <span className="text-3xl">{user.emoji}</span>
+                  <div className="flex-1">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-xl font-bold text-[#2a1020]">{user.role}</span>
+                      <span className="text-2xl font-black text-[#722D50]">{user.count}</span>
+                    </div>
+                    <p className="text-sm text-[#2a1020]/50">{user.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { value: "12,500+", label: "Direct Beneficiaries" },
+                { value: "38", label: "Projects Completed" },
+              ].map((stat, i) => (
+                <div key={i} className="rounded-xl bg-[#722D50]/5 p-5 text-center space-y-2">
+                  <p className="text-3xl font-black text-[#722D50]">{stat.value}</p>
+                  <p className="text-sm text-[#2a1020]/50 font-medium">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     ),
