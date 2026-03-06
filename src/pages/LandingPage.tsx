@@ -33,16 +33,16 @@ const LandingPage = () => {
             muted
             loop
             playsInline
-            className="w-full h-full object-cover"
-            poster="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=80"
+            className="absolute inset-0 w-full h-full object-cover"
           >
             <source
-              src="https://videos.pexels.com/video-files/3209828/3209828-uhd_2560_1440_25fps.mp4"
+              src="/videos/hero-bg.mp4"
               type="video/mp4"
             />
           </video>
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/60 via-[#0a0a0f]/55 to-[#0a0a0f]" />
+          {/* Color overlay for contrast */}
+          <div className="absolute inset-0 bg-[#0a0a0f]/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#A6CE39]/[0.07] via-transparent to-[#0a0a0f]/90" />
         </div>
 
         {/* Hero Content */}
