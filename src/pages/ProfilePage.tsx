@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { badgeInfo } from "@/data/mock-data";
+import profileAvatar from "@/assets/profile-avatar.jpg";
 
 const myProfile = {
   name: "Amina El Fassi",
@@ -67,9 +68,7 @@ const ProfilePage = () => {
       {/* Header */}
       <div className="flex flex-col items-center text-center animate-fade-in">
         <div className="relative">
-          <div className="w-20 h-20 rounded-full gradient-hero flex items-center justify-center text-white font-display font-bold text-2xl shadow-elevated">
-            {myProfile.avatar}
-          </div>
+          <img src={profileAvatar} alt={myProfile.name} className="w-20 h-20 rounded-full object-cover shadow-elevated" />
           <div className="absolute -bottom-1 -right-1 flex items-center gap-0.5 bg-highlight/15 rounded-full px-2 py-0.5">
             <Flame className="w-3 h-3 text-highlight" />
             <span className="text-[10px] font-bold text-highlight">{myProfile.streak}j</span>
