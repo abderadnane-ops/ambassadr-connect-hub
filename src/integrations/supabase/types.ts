@@ -14,7 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      access_requests: {
+        Row: {
+          cohort: string | null
+          coordinator_name: string | null
+          created_at: string
+          document_url: string | null
+          email: string
+          full_name: string
+          id: string
+          motivation: string | null
+          phone: string | null
+          region: string
+          role_in_network: string | null
+          status: string
+        }
+        Insert: {
+          cohort?: string | null
+          coordinator_name?: string | null
+          created_at?: string
+          document_url?: string | null
+          email: string
+          full_name: string
+          id?: string
+          motivation?: string | null
+          phone?: string | null
+          region: string
+          role_in_network?: string | null
+          status?: string
+        }
+        Update: {
+          cohort?: string | null
+          coordinator_name?: string | null
+          created_at?: string
+          document_url?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          motivation?: string | null
+          phone?: string | null
+          region?: string
+          role_in_network?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
