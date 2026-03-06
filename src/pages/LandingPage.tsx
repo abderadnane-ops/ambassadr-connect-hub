@@ -38,8 +38,8 @@ const LandingPage = () => {
             <source src="/videos/hero-bg.mp4" type="video/mp4" />
           </video>
           {/* White overlay — video ~75% visible */}
-          <div className="absolute inset-0 bg-white/25" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/25 to-white" />
+          <div className="absolute inset-0 bg-white/10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-white/10 to-white" />
         </div>
 
         {/* Hero Content — with text-shadow and backdrop for readability */}
