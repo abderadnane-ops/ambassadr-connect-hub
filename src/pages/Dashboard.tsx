@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import {
   AlertTriangle, ChevronRight, Calendar, Target,
-  Coffee, FileText, Briefcase, Clock, MapPin, Bell
+  Coffee, FileText, Briefcase, Clock, MapPin, Bell,
+  Users, GraduationCap, Megaphone, Sparkles
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { announcements, opportunities } from "@/data/mock-data";
 import DashboardHero from "@/components/dashboard/DashboardHero";
 
@@ -24,9 +26,9 @@ const myTasks = [
 ];
 
 const upcomingEvents = [
-  { id: "1", title: "Café Citoyen Rabat", date: "12 Mars", time: "14:00", type: "Café Citoyen", location: "Rabat" },
-  { id: "2", title: "Lab Citoyens - Éducation", date: "18 Mars", time: "10:00", type: "Lab Citoyens", location: "Casablanca" },
-  { id: "3", title: "Forum Régional", date: "25 Mars", time: "09:00", type: "Conférence", location: "Fès" },
+  { id: "1", title: "Café Citoyen Rabat", date: "12 Mars", time: "14:00", type: "Café Citoyen", location: "Rabat", attendees: 12, color: "secondary" as const },
+  { id: "2", title: "Lab Citoyens - Éducation", date: "18 Mars", time: "10:00", type: "Lab Citoyens", location: "Casablanca", attendees: 8, color: "accent" as const },
+  { id: "3", title: "Forum Régional", date: "25 Mars", time: "09:00", type: "Conférence", location: "Fès", attendees: 45, color: "primary" as const },
 ];
 
 const quickActions = [
@@ -35,10 +37,17 @@ const quickActions = [
 ];
 
 const categoryColors: Record<string, string> = {
-  Training: "bg-secondary/20 text-secondary",
-  Conference: "bg-accent/20 text-accent",
-  Grant: "bg-highlight/20 text-highlight",
-  Project: "bg-primary/20 text-primary",
+  Training: "bg-secondary/15 text-secondary border-l-secondary",
+  Conference: "bg-accent/15 text-accent border-l-accent",
+  Grant: "bg-highlight/15 text-highlight border-l-highlight",
+  Project: "bg-primary/15 text-primary border-l-primary",
+};
+
+const categoryIcons: Record<string, typeof Briefcase> = {
+  Training: GraduationCap,
+  Conference: Users,
+  Grant: Sparkles,
+  Project: Briefcase,
 };
 
 const categoryLabels: Record<string, string> = {
@@ -48,10 +57,16 @@ const categoryLabels: Record<string, string> = {
   Project: "Projet",
 };
 
-const priorityColors: Record<string, string> = {
-  high: "bg-destructive/15 text-destructive",
-  medium: "bg-highlight/15 text-highlight",
-  low: "bg-muted text-muted-foreground",
+const priorityConfig: Record<string, { bg: string; border: string; label: string }> = {
+  high: { bg: "bg-destructive/15 text-destructive", border: "border-l-destructive", label: "Urgent" },
+  medium: { bg: "bg-highlight/15 text-highlight", border: "border-l-highlight", label: "Moyen" },
+  low: { bg: "bg-muted text-muted-foreground", border: "border-l-muted-foreground/30", label: "Bas" },
+};
+
+const eventColorMap = {
+  secondary: { badge: "bg-secondary/15 text-secondary", icon: "bg-secondary/20 text-secondary", border: "border-l-secondary", gradient: "gradient-card-green" },
+  accent: { badge: "bg-accent/15 text-accent", icon: "bg-accent/20 text-accent", border: "border-l-accent", gradient: "gradient-card-blue" },
+  primary: { badge: "bg-primary/15 text-primary", icon: "bg-primary/20 text-primary", border: "border-l-primary", gradient: "gradient-card-purple" },
 };
 
 const Dashboard = () => {
@@ -67,14 +82,15 @@ const Dashboard = () => {
 
       {/* Urgent Announcement */}
       {urgentAnnouncement && (
-        <Card className="border-destructive/30 bg-destructive/5 shadow-card animate-fade-in" style={{ animationDelay: "0.05s", opacity: 0 }}>
-          <CardContent className="p-3 flex items-start gap-3">
-            <div className="p-2 rounded-lg bg-destructive/20 shrink-0 animate-pulse-glow">
-              <AlertTriangle className="w-4 h-4 text-destructive" />
+        <Card className="border-l-4 border-l-destructive border-0 shadow-card bg-destructive/5 animate-fade-in overflow-hidden" style={{ animationDelay: "0.05s", opacity: 0 }}>
+          <CardContent className="p-4 flex items-start gap-3">
+            <div className="p-2.5 rounded-xl bg-destructive/15 shrink-0 animate-pulse-glow">
+              <AlertTriangle className="w-5 h-5 text-destructive" />
             </div>
             <div className="min-w-0 flex-1">
               <p className="font-display font-semibold text-sm">{urgentAnnouncement.title}</p>
-              <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{urgentAnnouncement.content}</p>
+              <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{urgentAnnouncement.content}</p>
+              <span className="text-[10px] text-destructive/70 mt-2 inline-block">{urgentAnnouncement.date}</span>
             </div>
           </CardContent>
         </Card>
@@ -84,9 +100,9 @@ const Dashboard = () => {
       <div className="grid grid-cols-2 gap-3 animate-fade-in" style={{ animationDelay: "0.08s", opacity: 0 }}>
         {quickActions.map((action) => (
           <Link key={action.label} to={action.path}>
-            <Card className="border-0 shadow-card hover:shadow-elevated transition-all group">
+            <Card className="border-0 shadow-card hover:shadow-elevated transition-all duration-200 group">
               <CardContent className="p-4 flex items-center gap-3">
-                <div className={`w-10 h-10 rounded-xl ${action.color} flex items-center justify-center shrink-0 transition-transform group-hover:scale-110`}>
+                <div className={`w-11 h-11 rounded-xl ${action.color} flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 group-hover:rotate-3`}>
                   <action.icon className="w-5 h-5" />
                 </div>
                 <div>
@@ -110,28 +126,36 @@ const Dashboard = () => {
           </Badge>
         </div>
         <div className="space-y-2">
-          {pendingTasks.map((task) => (
-            <Card key={task.id} className="border-0 shadow-card">
-              <CardContent className="p-3 flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full border-2 border-muted-foreground/30 shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium line-clamp-1">{task.title}</p>
-                  <span className="text-[10px] text-muted-foreground">{task.due}</span>
-                </div>
-                <Badge className={`${priorityColors[task.priority]} border-0 text-[9px] px-1.5`}>
-                  {task.priority === "high" ? "Urgent" : task.priority === "medium" ? "Moyen" : "Bas"}
-                </Badge>
-              </CardContent>
-            </Card>
-          ))}
+          {pendingTasks.map((task, i) => {
+            const config = priorityConfig[task.priority];
+            return (
+              <Card key={task.id} className={`border-0 border-l-4 ${config.border} shadow-card hover:shadow-elevated transition-all duration-200 group`}>
+                <CardContent className="p-3.5 flex items-center gap-3">
+                  <div className={`w-6 h-6 rounded-full border-2 shrink-0 transition-all duration-200 group-hover:scale-110 ${
+                    task.priority === "high" ? "border-destructive/50" : task.priority === "medium" ? "border-highlight/50" : "border-muted-foreground/30"
+                  }`} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium line-clamp-1">{task.title}</p>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <Clock className="w-3 h-3 text-muted-foreground" />
+                      <span className="text-[10px] text-muted-foreground">{task.due}</span>
+                    </div>
+                  </div>
+                  <Badge className={`${config.bg} border-0 text-[9px] px-2 py-0.5`}>
+                    {config.label}
+                  </Badge>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
         <Progress
           value={(myProfile.tasksCompleted / myProfile.tasksTotal) * 100}
-          className="mt-3 h-1.5"
+          className="mt-3 h-2 [&>div]:transition-all [&>div]:duration-1000"
         />
       </section>
 
-      {/* Upcoming Events */}
+      {/* Upcoming Events — Rich Cards */}
       <section className="animate-fade-in" style={{ animationDelay: "0.18s", opacity: 0 }}>
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-display font-semibold text-base flex items-center gap-2">
@@ -139,78 +163,113 @@ const Dashboard = () => {
           </h3>
         </div>
         <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
-          {upcomingEvents.map((event) => (
-            <Card key={event.id} className="shrink-0 w-56 border-0 shadow-card">
-              <CardContent className="p-4">
-                <Badge className="bg-accent/15 text-accent border-0 text-[10px] mb-2">{event.type}</Badge>
-                <h4 className="font-display font-semibold text-sm">{event.title}</h4>
-                <div className="flex items-center gap-2 mt-2 text-[10px] text-muted-foreground">
-                  <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{event.date} · {event.time}</span>
-                </div>
-                <div className="flex items-center gap-1 mt-1 text-[10px] text-muted-foreground">
-                  <MapPin className="w-3 h-3" />{event.location}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+          {upcomingEvents.map((event) => {
+            const colors = eventColorMap[event.color];
+            return (
+              <Card key={event.id} className={`shrink-0 w-64 border-0 border-l-4 ${colors.border} shadow-card hover:shadow-elevated transition-all duration-200 group overflow-hidden`}>
+                <CardContent className="p-0">
+                  {/* Color header strip */}
+                  <div className={`${colors.gradient} px-4 pt-4 pb-3`}>
+                    <Badge className={`${colors.badge} border-0 text-[10px] mb-2`}>{event.type}</Badge>
+                    <h4 className="font-display font-semibold text-sm group-hover:text-primary transition-colors">{event.title}</h4>
+                  </div>
+                  <div className="px-4 py-3 space-y-2">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Clock className="w-3.5 h-3.5" />
+                      <span>{event.date} · {event.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <MapPin className="w-3.5 h-3.5" />
+                      <span>{event.location}</span>
+                    </div>
+                    <div className="flex items-center justify-between pt-1">
+                      <div className="flex items-center gap-1.5">
+                        <Users className="w-3.5 h-3.5 text-muted-foreground" />
+                        <span className="text-xs font-medium">{event.attendees} participants</span>
+                      </div>
+                      <div className="flex -space-x-1.5">
+                        {["A", "B", "C"].map((letter) => (
+                          <Avatar key={letter} className="w-5 h-5 border border-card">
+                            <AvatarFallback className="text-[8px] bg-muted font-bold">{letter}</AvatarFallback>
+                          </Avatar>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </section>
 
-      {/* New Opportunities */}
+      {/* New Opportunities — Visual Cards */}
       <section className="animate-fade-in" style={{ animationDelay: "0.24s", opacity: 0 }}>
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-display font-semibold text-base flex items-center gap-2">
             <Briefcase className="w-4 h-4 text-primary" /> Nouvelles opportunités
           </h3>
-          <Link to="/resources" className="text-xs text-primary flex items-center gap-0.5 font-medium">
+          <Link to="/resources" className="text-xs text-primary flex items-center gap-0.5 font-medium hover:gap-1.5 transition-all duration-200">
             Voir tout <ChevronRight className="w-3 h-3" />
           </Link>
         </div>
-        <div className="space-y-2">
-          {upcomingOpps.map((opp) => (
-            <Card key={opp.id} className="border-0 shadow-card">
-              <CardContent className="p-3 flex items-center gap-3">
-                <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${categoryColors[opp.category]}`}>
-                  <Briefcase className="w-4 h-4" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <h4 className="font-semibold text-sm line-clamp-1">{opp.title}</h4>
-                    {opp.status === "urgent" && (
-                      <Badge className="bg-destructive/15 text-destructive border-0 text-[9px] px-1.5 shrink-0">Urgent</Badge>
-                    )}
+        <div className="space-y-3">
+          {upcomingOpps.map((opp) => {
+            const catColor = categoryColors[opp.category];
+            const CatIcon = categoryIcons[opp.category] || Briefcase;
+            return (
+              <Card key={opp.id} className={`border-0 border-l-4 ${catColor.split(" ")[2]} shadow-card hover:shadow-elevated transition-all duration-200 group overflow-hidden`}>
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3">
+                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${catColor.split(" ").slice(0, 2).join(" ")} transition-transform duration-200 group-hover:scale-110`}>
+                      <CatIcon className="w-5 h-5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <Badge className={`${catColor.split(" ").slice(0, 2).join(" ")} border-0 text-[10px] px-2`}>
+                          {categoryLabels[opp.category]}
+                        </Badge>
+                        {opp.status === "urgent" && (
+                          <Badge className="bg-destructive/15 text-destructive border-0 text-[9px] px-1.5 shrink-0 animate-pulse">Urgent</Badge>
+                        )}
+                      </div>
+                      <h4 className="font-display font-semibold text-sm mt-1.5 line-clamp-1">{opp.title}</h4>
+                      <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{opp.description}</p>
+                      <div className="flex items-center gap-3 mt-2 text-[10px] text-muted-foreground">
+                        <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{opp.location}</span>
+                        <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{opp.deadline}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 mt-0.5 text-[10px] text-muted-foreground">
-                    <span>{categoryLabels[opp.category]}</span>
-                    <span>·</span>
-                    <span>{opp.location}</span>
-                    <span>·</span>
-                    <span>{opp.deadline}</span>
-                  </div>
-                </div>
-                <ChevronRight className="w-4 h-4 text-muted-foreground shrink-0" />
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </section>
 
-      {/* Announcements */}
+      {/* Announcements — Visual Cards */}
       <section className="animate-fade-in" style={{ animationDelay: "0.3s", opacity: 0 }}>
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-display font-semibold text-base flex items-center gap-2">
             <Bell className="w-4 h-4 text-primary" /> Annonces
           </h3>
         </div>
-        <div className="space-y-2">
-          {otherAnnouncements.map((news) => (
-            <Card key={news.id} className="border-0 shadow-card">
-              <CardContent className="p-3">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[10px] text-muted-foreground">{news.date}</span>
+        <div className="space-y-3">
+          {otherAnnouncements.map((news, i) => (
+            <Card key={news.id} className="border-0 shadow-card hover:shadow-elevated transition-all duration-200 group overflow-hidden">
+              <CardContent className="p-4 flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110">
+                  <Megaphone className="w-5 h-5 text-accent" />
                 </div>
-                <h4 className="font-display font-semibold text-sm">{news.title}</h4>
-                <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{news.content}</p>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Badge className="bg-muted text-muted-foreground border-0 text-[10px]">{news.date}</Badge>
+                  </div>
+                  <h4 className="font-display font-semibold text-sm">{news.title}</h4>
+                  <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{news.content}</p>
+                </div>
+                <ChevronRight className="w-4 h-4 text-muted-foreground shrink-0 mt-1 transition-transform duration-200 group-hover:translate-x-1" />
               </CardContent>
             </Card>
           ))}
