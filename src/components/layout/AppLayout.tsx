@@ -175,7 +175,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             </DropdownMenu>
           </header>
 
-          <main className="flex-1 overflow-auto bg-background p-6 pb-20 md:pb-6">
+          <main className="flex-1 overflow-auto bg-background p-6 pb-20 lg:pb-6">
             {children}
           </main>
           <BottomNav />
