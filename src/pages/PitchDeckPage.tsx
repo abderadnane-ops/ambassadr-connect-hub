@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Maximize2, Minimize2, Users, AlertTriangle, Lightbulb, Target, Shield, TrendingUp, MapPin, Layers, ArrowRight } from "lucide-react";
+import { SequenceDiagramSlide, InteractionDiagramSlide, CloudLayersSlide } from "@/components/pitch/AdditionalSlides";
 
 
 const slides = [
@@ -315,7 +316,13 @@ const slides = [
       </div>
     ),
   },
-  // Slide 8: Call to Action
+  // Slide 8: Sequence Diagram
+  SequenceDiagramSlide,
+  // Slide 9: Interaction Diagram
+  InteractionDiagramSlide,
+  // Slide 10: Cloud Architecture Layers
+  CloudLayersSlide,
+  // Slide 11: Call to Action
   {
     id: 8,
     render: () => (
