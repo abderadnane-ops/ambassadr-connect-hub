@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
+import BottomNav from "@/components/layout/BottomNav";
 import { useState } from "react";
 import {
   Home, Users, Briefcase, MessageCircle, User, Search, Bell, LogOut,
@@ -174,9 +175,10 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             </DropdownMenu>
           </header>
 
-          <main className="flex-1 overflow-auto bg-background p-6">
+          <main className="flex-1 overflow-auto bg-background p-6 pb-20 md:pb-6">
             {children}
           </main>
+          <BottomNav />
         </div>
       </div>
     </SidebarProvider>

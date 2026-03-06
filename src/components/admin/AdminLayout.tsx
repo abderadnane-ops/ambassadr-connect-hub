@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
+import AdminBottomNav from "@/components/admin/AdminBottomNav";
 import { useState } from "react";
 import {
   LayoutDashboard, Users, GraduationCap, ShieldCheck, CheckSquare, FileText, Target,
@@ -197,9 +198,10 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             </DropdownMenu>
           </header>
 
-          <main className="flex-1 overflow-auto bg-background p-6">
+          <main className="flex-1 overflow-auto bg-background p-6 pb-20 lg:pb-6">
             {children}
           </main>
+          <AdminBottomNav />
         </div>
       </div>
     </SidebarProvider>
