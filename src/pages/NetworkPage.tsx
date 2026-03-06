@@ -128,7 +128,7 @@ const NetworkPage = () => {
     <div className="px-4 py-4 space-y-4">
       <div className="animate-fade-in">
         <h2 className="font-display text-xl font-bold">Réseau</h2>
-        <p className="text-sm text-muted-foreground mt-1">{ambassadors.length} ambassadeurs</p>
+        <p className="text-sm text-muted-foreground mt-1">188 ambassadeurs</p>
       </div>
 
       {/* View toggle */}
