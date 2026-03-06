@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { regions, ambassadors } from "@/data/mock-data";
+import { ambassadorAvatars } from "@/data/ambassador-avatars";
 
 // Real lat/lng coordinates for each region center
 const regionCoords: Record<string, { lat: number; lng: number }> = {
@@ -123,15 +124,15 @@ const MoroccoMap = ({ selectedRegion, onRegionSelect }: Props) => {
                 animationDelay: `${i * 0.05}s`,
               }}
             >
-              <div
-                className={`w-7 h-7 rounded-full gradient-hero flex items-center justify-center text-white font-display font-bold text-[8px] ring-2 transition-all duration-300 ${
+              <img
+                src={ambassadorAvatars[amb.id]}
+                alt={amb.name}
+                className={`w-7 h-7 rounded-full object-cover ring-2 transition-all duration-300 ${
                   isInSelected
                     ? "ring-secondary shadow-glow-green"
                     : "ring-white/80 shadow-md"
                 }`}
-              >
-                {amb.avatar}
-              </div>
+              />
             </div>
           );
         })}
