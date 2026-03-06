@@ -3,10 +3,8 @@ import BottomNav from "@/components/layout/BottomNav";
 import { useState } from "react";
 import {
   Home, Users, Briefcase, MessageCircle, User, Search, Bell, LogOut,
-  Coffee, Share2, MessageSquarePlus, ClipboardList, ChevronDown, Settings,
-  GraduationCap, History, MapPin, CheckSquare
+  Coffee, Share2, MessageSquarePlus, ClipboardList, ChevronDown, Settings
 } from "lucide-react";
-import { useMentor } from "@/hooks/use-mentor";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel,
   SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton,
@@ -22,7 +20,7 @@ import {
 import citizinLogoDark from "@/assets/citizin-logo-dark.png";
 import profileAvatar from "@/assets/profile-avatar.jpg";
 
-const baseNavGroups = [
+const navGroups = [
   {
     label: "PRINCIPAL",
     items: [
@@ -52,24 +50,10 @@ const baseNavGroups = [
   },
 ];
 
-const mentorNavGroup = {
-  label: "MENTORAT",
-  items: [
-    { title: "Validations", url: "/validation", icon: CheckSquare },
-    { title: "Mes mentorés", url: "/mentees", icon: GraduationCap },
-    { title: "Activité régionale", url: "/regional-activity", icon: MapPin },
-    { title: "Historique", url: "/validation-history", icon: History },
-  ],
-};
-
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
-  const { isMentor } = useMentor();
 
-  const navGroups = isMentor
-    ? [...baseNavGroups.slice(0, 2), mentorNavGroup, ...baseNavGroups.slice(2)]
-    : baseNavGroups;
   const allItems = navGroups.flatMap((g) => g.items);
 
   return (
