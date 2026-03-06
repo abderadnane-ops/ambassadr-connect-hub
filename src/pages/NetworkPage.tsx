@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Star, Trophy, ArrowLeft, FolderOpen, Users, Map } from "lucide-react";
+import { Search, Star, Trophy, ArrowLeft, FolderOpen, Users, Map, Linkedin, Instagram, Facebook, Twitter } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -101,6 +101,25 @@ const NetworkPage = () => {
             ))}
           </div>
         )}
+
+        {/* Social Links */}
+        <div>
+          <h3 className="font-display font-semibold text-sm mb-2">Réseaux sociaux</h3>
+          <div className="flex items-center gap-3">
+            <a href="#" className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a href="#" className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+              <Instagram className="w-4 h-4" />
+            </a>
+            <a href="#" className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a href="#" className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+              <Twitter className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
       </div>
     );
   }
