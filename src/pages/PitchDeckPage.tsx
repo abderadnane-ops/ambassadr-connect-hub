@@ -54,11 +54,11 @@ const slides = [
             </p>
             <div className="space-y-4">
               {[
-                "Communication dispersée entre WhatsApp, email et téléphone",
-                "Aucune visibilité centralisée sur les projets et leur impact",
-                "Suivi manuel des activités et des rapports via Excel",
-                "Perte de données et de mémoire institutionnelle",
-                "Impossible de mesurer l'impact réel du réseau"
+                "Communication scattered between WhatsApp, email and phone",
+                "No centralized visibility on projects and their impact",
+                "Manual tracking of activities and reports via Excel",
+                "Loss of data and institutional memory",
+                "Impossible to measure the network's real impact"
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-red-500 mt-3 shrink-0" />
