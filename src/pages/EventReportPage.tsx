@@ -63,7 +63,7 @@ const EventReportPage = () => {
             Merci pour votre rapport détaillé. Ces données contribuent à l'intelligence collective du réseau.
           </p>
           <div className="flex gap-3 justify-center">
-            <Button variant="outline" onClick={() => navigate("/")}>Accueil</Button>
+            <Button variant="outline" onClick={() => navigate("/dashboard")}>Accueil</Button>
             <Button onClick={() => { setSubmitted(false); setForm({ eventTitle: "", eventType: "", eventDate: "", region: "", actualAttendees: "", womenPercentage: "", youthPercentage: "", summary: "", keyDiscussions: "", outcomes: "", recommendations: "", challenges: "", satisfaction: "", participantFeedback: "", mediaLinks: "", followUpActions: "" }); }}>
               Nouveau rapport
             </Button>

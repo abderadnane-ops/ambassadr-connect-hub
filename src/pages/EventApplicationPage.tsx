@@ -93,7 +93,7 @@ const EventApplicationPage = () => {
             </CardContent>
           </Card>
           <div className="flex gap-3 justify-center">
-            <Button variant="outline" onClick={() => navigate("/")}>Accueil</Button>
+            <Button variant="outline" onClick={() => navigate("/dashboard")}>Accueil</Button>
             <Button onClick={() => { setSubmitted(false); setEventType(""); setForm({ title: "", theme: "", description: "", objectives: "", region: "", city: "", venue: "", date: "", time: "", duration: "", expectedAttendees: "", targetAudience: "", partners: "", needsSupport: "" }); }}>
               Nouvelle demande
             </Button>

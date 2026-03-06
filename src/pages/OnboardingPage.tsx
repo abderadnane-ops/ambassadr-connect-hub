@@ -86,7 +86,7 @@ const OnboardingPage = () => {
   };
 
   const handleFinish = () => {
-    navigate("/");
+    navigate("/dashboard");
   };
 
   return (
