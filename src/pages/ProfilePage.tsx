@@ -1,9 +1,9 @@
-import { Star, Trophy, FolderOpen, MapPin, Award, ChevronRight, Settings, LogOut, Coffee, FileText, Activity, Heart, Clock, Target, TrendingUp, BarChart3, Flame, ClipboardCheck } from "lucide-react";
+import { Star, FolderOpen, MapPin, Award, ChevronRight, Settings, LogOut, Coffee, FileText, Activity, Heart, Clock, Target, BarChart3, Flame, ClipboardCheck, Trophy } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { badgeInfo, ambassadors } from "@/data/mock-data";
+import { badgeInfo } from "@/data/mock-data";
 
 const myProfile = {
   name: "Amina El Fassi",
@@ -50,7 +50,7 @@ const achievements = [
   { title: "Réseau National", desc: "Collaborer avec 5 régions", unlocked: false, icon: "🌍" },
 ];
 
-const topAmbassadors = [...ambassadors].sort((a, b) => b.points - a.points).slice(0, 5);
+
 
 const menuItems = [
   { label: "Validation mentor", icon: ClipboardCheck, path: "/validation" },
@@ -214,35 +214,6 @@ const ProfilePage = () => {
         </div>
       </section>
 
-      {/* Ambassador Ranking */}
-      <section className="animate-fade-in" style={{ animationDelay: "0.28s", opacity: 0 }}>
-        <h3 className="font-display font-semibold text-sm mb-2 flex items-center gap-2">
-          <Trophy className="w-4 h-4 text-highlight" /> Classement
-        </h3>
-        <Card className="border-0 shadow-card">
-          <CardContent className="p-4 space-y-2.5">
-            {topAmbassadors.map((amb, i) => (
-              <div key={amb.id} className={`flex items-center gap-3 ${amb.name === myProfile.name ? "bg-primary/5 -mx-2 px-2 py-1 rounded-lg" : ""}`}>
-                <span className={`w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center shrink-0 ${
-                  i === 0 ? "bg-highlight text-highlight-foreground" :
-                  i === 1 ? "bg-muted text-foreground" :
-                  i === 2 ? "bg-accent/20 text-accent" :
-                  "bg-muted text-muted-foreground"
-                }`}>
-                  {i + 1}
-                </span>
-                <div className="w-7 h-7 rounded-full gradient-hero flex items-center justify-center text-white text-[10px] font-bold shrink-0">
-                  {amb.avatar}
-                </div>
-                <span className="text-sm font-medium flex-1">{amb.name}</span>
-                <span className="text-xs font-bold text-highlight flex items-center gap-0.5">
-                  <Star className="w-3 h-3 fill-highlight" />{amb.points}
-                </span>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      </section>
 
       {/* Skills */}
       <section className="animate-fade-in" style={{ animationDelay: "0.32s", opacity: 0 }}>
