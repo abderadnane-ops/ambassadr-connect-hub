@@ -22,6 +22,7 @@ export interface EventData {
   participationStatus: ParticipationStatus;
   description: string;
   participants: { initials: string; name: string }[];
+  image?: string;
 }
 
 export const eventsData: EventData[] = [
