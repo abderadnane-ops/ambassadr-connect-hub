@@ -41,8 +41,8 @@ const LandingPage = () => {
             />
           </video>
           {/* Color overlay for contrast */}
-          <div className="absolute inset-0 bg-[#0a0a0f]/50" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#A6CE39]/[0.07] via-transparent to-[#0a0a0f]/90" />
+          <div className="absolute inset-0 bg-[#0a0a0f]/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/30 via-[#0a0a0f]/20 to-[#0a0a0f]/95" />
         </div>
 
         {/* Hero Content */}
