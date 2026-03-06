@@ -1,4 +1,4 @@
-import { Star, FolderOpen, MapPin, Award, ChevronRight, Settings, LogOut, Coffee, FileText, Activity, Heart, Clock, Target, BarChart3, Flame, ClipboardCheck, Trophy } from "lucide-react";
+import { Star, FolderOpen, MapPin, Award, ChevronRight, Settings, LogOut, Coffee, FileText, Activity, Heart, Clock, Target, BarChart3, Flame, ClipboardCheck, Trophy, Linkedin, Instagram, Facebook, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -78,6 +78,24 @@ const ProfilePage = () => {
         <p className="text-sm text-muted-foreground">{myProfile.role}</p>
         <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
           <MapPin className="w-3 h-3" /> {myProfile.region}
+        </div>
+        <div className="flex items-center gap-3 mt-3">
+          {[
+            { icon: Linkedin, href: "https://linkedin.com", color: "text-[#0A66C2]" },
+            { icon: Twitter, href: "https://x.com", color: "text-foreground" },
+            { icon: Instagram, href: "https://instagram.com", color: "text-[#E4405F]" },
+            { icon: Facebook, href: "https://facebook.com", color: "text-[#1877F2]" },
+          ].map((social, i) => (
+            <a
+              key={i}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`w-8 h-8 rounded-full bg-muted flex items-center justify-center ${social.color} hover:scale-110 transition-transform`}
+            >
+              <social.icon className="w-4 h-4" />
+            </a>
+          ))}
         </div>
       </div>
 
