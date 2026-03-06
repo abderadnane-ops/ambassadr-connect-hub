@@ -105,6 +105,9 @@ const Dashboard = () => {
         </Card>
       )}
 
+      {/* Mentor Widget */}
+      <MentorDashboardWidget />
+
       {/* Quick Actions */}
       <div className="grid grid-cols-2 gap-3 animate-fade-in" style={{ animationDelay: "0.08s", opacity: 0 }}>
         {quickActions.map((action) => (

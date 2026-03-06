@@ -13,7 +13,11 @@ import EventApplicationPage from "./pages/EventApplicationPage";
 import EventReportPage from "./pages/EventReportPage";
 import ProfilePage from "./pages/ProfilePage";
 import MentorValidationPage from "./pages/MentorValidationPage";
+import MenteesPage from "./pages/MenteesPage";
+import ValidationHistoryPage from "./pages/ValidationHistoryPage";
+import RegionalActivityPage from "./pages/RegionalActivityPage";
 import LandingPage from "./pages/LandingPage";
+import { MentorProvider } from "./hooks/use-mentor";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
@@ -40,6 +44,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <MentorProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -57,6 +62,9 @@ const App = () => (
           <Route element={<AppLayout><EventApplicationPage /></AppLayout>} path="/event-application" />
           <Route element={<AppLayout><EventReportPage /></AppLayout>} path="/event-report" />
           <Route element={<AppLayout><MentorValidationPage /></AppLayout>} path="/validation" />
+          <Route element={<AppLayout><MenteesPage /></AppLayout>} path="/mentees" />
+          <Route element={<AppLayout><ValidationHistoryPage /></AppLayout>} path="/validation-history" />
+          <Route element={<AppLayout><RegionalActivityPage /></AppLayout>} path="/regional-activity" />
           <Route element={<AppLayout><EventDetailPage /></AppLayout>} path="/event/:id" />
 
           {/* Admin routes */}
@@ -78,6 +86,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      </MentorProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
