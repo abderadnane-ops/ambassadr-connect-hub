@@ -138,6 +138,16 @@ const LoginPage = () => {
                 <LogIn className="w-4 h-4 mr-2" />
                 {loading ? "Connexion..." : role === "admin" ? "Connexion administrateur" : "Se connecter"}
               </Button>
+
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => navigate(role === "admin" ? "/admin/dashboard" : "/dashboard")}
+                className="w-full h-11 rounded-xl font-semibold"
+              >
+                Accès démo {role === "admin" ? "Admin" : "Ambassadeur"}
+              </Button>
+
               {role === "admin" && (
                 <p className="text-[11px] text-muted-foreground text-center">
                   Accès réservé à l'équipe d'administration du réseau
