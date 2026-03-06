@@ -137,7 +137,7 @@ const LoginPage = () => {
                 </div>
               </div>
 
-              <Button type="submit" disabled={loading} className="w-full h-11 rounded-xl font-semibold">
+              <Button type="submit" disabled={loading} className={cn("w-full h-11 rounded-xl font-semibold", role === "admin" && "bg-[#A6CE39] text-[#1a1a1a] hover:bg-[#95ba30]")}>
                 <LogIn className="w-4 h-4 mr-2" />
                 {loading ? "Connexion..." : role === "admin" ? "Connexion administrateur" : "Se connecter"}
               </Button>
@@ -146,7 +146,7 @@ const LoginPage = () => {
                 type="button"
                 variant="outline"
                 onClick={() => navigate(role === "admin" ? "/admin/dashboard" : "/dashboard")}
-                className="w-full h-11 rounded-xl font-semibold"
+                className={cn("w-full h-11 rounded-xl font-semibold", role === "admin" && "border-[#A6CE39] text-[#A6CE39] hover:bg-[#A6CE39]/10")}
               >
                 Accès démo {role === "admin" ? "Admin" : "Ambassadeur"}
               </Button>
