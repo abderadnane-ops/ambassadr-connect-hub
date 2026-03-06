@@ -1,79 +1,87 @@
 import { ArrowRight, ArrowDown, GitBranch, Network, Layers } from "lucide-react";
 
-// Slide: Sequence Diagram - Report Validation Flow
+// Slide: Sequence Diagram - Full Platform Workflow
 export const SequenceDiagramSlide = {
   id: 9,
-  render: () => (
-    <div className="w-full h-full bg-white flex flex-col px-20 py-16">
-      <div className="flex items-center gap-4 mb-10">
-        <div className="w-14 h-14 rounded-2xl bg-[#722D50]/10 flex items-center justify-center">
-          <GitBranch className="w-7 h-7 text-[#722D50]" />
-        </div>
-        <h2 className="text-5xl font-bold text-[#2a1020]">Sequence Diagram</h2>
-      </div>
-      <p className="text-xl text-[#2a1020]/50 mb-8">Report submission & validation workflow</p>
-
-      <div className="flex-1 flex items-center justify-center">
-        <div className="w-full max-w-5xl">
-          {/* Actor headers */}
-          <div className="grid grid-cols-4 gap-4 mb-2">
-            {[
-              { label: "Ambassador", color: "#A6CE39", emoji: "🌱" },
-              { label: "Platform", color: "#2a1020", emoji: "💻" },
-              { label: "Mentor", color: "#722D50", emoji: "🎓" },
-              { label: "Admin", color: "#2a1020", emoji: "⚙️" },
-            ].map((actor, i) => (
-              <div key={i} className="flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full flex items-center justify-center text-2xl border-2 mb-2" style={{ borderColor: actor.color, backgroundColor: `${actor.color}15` }}>
-                  {actor.emoji}
-                </div>
-                <span className="text-base font-bold" style={{ color: actor.color }}>{actor.label}</span>
-              </div>
-            ))}
+  render: () => {
+    const actors = [
+      { label: "Ambassador", color: "#A6CE39", emoji: "🌱" },
+      { label: "CITZEN Platform", color: "#2a1020", emoji: "💻" },
+      { label: "Mentor", color: "#722D50", emoji: "🎓" },
+      { label: "Admin", color: "#2a1020", emoji: "⚙️" },
+    ];
+    const messages = [
+      { from: 0, to: 1, label: "1. Sign up & complete onboarding profile", color: "#A6CE39" },
+      { from: 1, to: 0, label: "2. Assign dashboard, region & mentor", color: "#A6CE39" },
+      { from: 0, to: 1, label: "3. Submit activity report", color: "#A6CE39" },
+      { from: 1, to: 2, label: "4. Notify mentor for validation", color: "#722D50" },
+      { from: 2, to: 1, label: "5. Approve / Request revision", color: "#722D50" },
+      { from: 1, to: 0, label: "6. Notify result + award points", color: "#A6CE39" },
+      { from: 0, to: 1, label: "7. Post in social hub feed", color: "#A6CE39" },
+      { from: 0, to: 1, label: "8. Register for event", color: "#A6CE39" },
+      { from: 1, to: 3, label: "9. Aggregate data to analytics", color: "#2a1020" },
+      { from: 3, to: 1, label: "10. Publish announcement", color: "#2a1020" },
+      { from: 1, to: 0, label: "11. Push notification to all", color: "#A6CE39" },
+    ];
+    const colW = 25; // percentage per column
+    return (
+      <div className="w-full h-full bg-white flex flex-col px-16 py-12">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="w-12 h-12 rounded-2xl bg-[#722D50]/10 flex items-center justify-center">
+            <GitBranch className="w-6 h-6 text-[#722D50]" />
           </div>
+          <h2 className="text-4xl font-bold text-[#2a1020]">Sequence Diagram</h2>
+        </div>
+        <p className="text-lg text-[#2a1020]/50 mb-6">End-to-end platform workflow — from onboarding to impact tracking</p>
 
-          {/* Lifelines */}
-          <div className="relative grid grid-cols-4 gap-4">
-            {/* Vertical lifelines */}
-            {[0, 1, 2, 3].map(i => (
-              <div key={i} className="flex justify-center">
-                <div className="w-0.5 h-[420px] bg-[#2a1020]/10" style={{ position: "absolute", top: 0 }} />
+        {/* Actor headers */}
+        <div className="grid grid-cols-4 gap-2 mb-1">
+          {actors.map((actor, i) => (
+            <div key={i} className="flex flex-col items-center">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center text-xl border-2 mb-1" style={{ borderColor: actor.color, backgroundColor: `${actor.color}15` }}>
+                {actor.emoji}
               </div>
-            ))}
-
-            {/* Messages */}
-            <div className="absolute inset-0 flex flex-col justify-between py-4" style={{ height: 420 }}>
-              {[
-                { from: 0, to: 1, label: "1. Submit activity report", color: "#A6CE39" },
-                { from: 1, to: 2, label: "2. Notify mentor for review", color: "#722D50" },
-                { from: 2, to: 1, label: "3. Validate / Request changes", color: "#722D50" },
-                { from: 1, to: 0, label: "4. Notify ambassador of status", color: "#A6CE39" },
-                { from: 1, to: 3, label: "5. Aggregate to admin dashboard", color: "#2a1020" },
-                { from: 3, to: 1, label: "6. Generate impact analytics", color: "#2a1020" },
-              ].map((msg, i) => {
-                const leftCol = Math.min(msg.from, msg.to);
-                const rightCol = Math.max(msg.from, msg.to);
-                const isReverse = msg.to < msg.from;
-                return (
-                  <div key={i} className="relative h-14 flex items-center" style={{ marginLeft: `${leftCol * 25 + 12.5}%`, width: `${(rightCol - leftCol) * 25}%` }}>
-                    <div className="absolute inset-x-0 top-1/2 h-0.5 rounded" style={{ backgroundColor: msg.color }} />
-                    <div className={`absolute ${isReverse ? "left-0" : "right-0"} top-1/2 -translate-y-1/2`}>
-                      <ArrowRight className="w-4 h-4" style={{ color: msg.color, transform: isReverse ? "rotate(180deg)" : "none" }} />
-                    </div>
-                    <div className="absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                      <span className="text-xs font-semibold px-2 py-1 rounded-full bg-white shadow-sm border" style={{ color: msg.color, borderColor: `${msg.color}30` }}>
-                        {msg.label}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
+              <span className="text-sm font-bold" style={{ color: actor.color }}>{actor.label}</span>
             </div>
+          ))}
+        </div>
+
+        {/* Sequence rows */}
+        <div className="flex-1 relative">
+          {/* Vertical lifelines */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+            {actors.map((_, i) => (
+              <line key={i} x1={`${i * colW + colW / 2}%`} y1="0" x2={`${i * colW + colW / 2}%`} y2="100%" stroke="#2a102015" strokeWidth="1.5" strokeDasharray="4 4" />
+            ))}
+          </svg>
+
+          {/* Messages */}
+          <div className="relative flex flex-col justify-evenly h-full py-1">
+            {messages.map((msg, i) => {
+              const leftCol = Math.min(msg.from, msg.to);
+              const rightCol = Math.max(msg.from, msg.to);
+              const isReverse = msg.to < msg.from;
+              const leftPct = leftCol * colW + colW / 2;
+              const widthPct = (rightCol - leftCol) * colW;
+              return (
+                <div key={i} className="relative flex items-center" style={{ height: 36, marginLeft: `${leftPct}%`, width: `${widthPct}%` }}>
+                  <div className="absolute inset-x-0 top-1/2 h-[2px] rounded-full" style={{ backgroundColor: msg.color }} />
+                  <div className={`absolute ${isReverse ? "left-0" : "right-0"} top-1/2 -translate-y-1/2`}>
+                    <ArrowRight className="w-3.5 h-3.5" style={{ color: msg.color, transform: isReverse ? "rotate(180deg)" : "none" }} />
+                  </div>
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                    <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-white shadow-sm border" style={{ color: msg.color, borderColor: `${msg.color}30` }}>
+                      {msg.label}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
-    </div>
-  ),
+    );
+  },
 };
 
 // Slide: Interaction Diagram - How roles interact
