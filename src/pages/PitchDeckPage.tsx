@@ -221,38 +221,37 @@ const slides = [
         <p className="text-2xl text-[#2a1020]/60 mb-10 max-w-4xl">
           What CITZEN will change for the network and its stakeholders
         </p>
-        <div className="flex-1 grid grid-cols-2 gap-10 items-start">
-          <div className="space-y-5">
+        <div className="flex-1 grid grid-cols-2 gap-8 items-center">
+          <div className="space-y-6">
             {[
               { icon: "⚡", title: "80% faster coordination", desc: "Replace fragmented WhatsApp/email chains with a single real-time hub — reducing response time from days to minutes." },
               { icon: "📊", title: "100% report digitization", desc: "Move from Excel spreadsheets to structured digital reports with automated validation workflows." },
               { icon: "🔍", title: "Full impact visibility", desc: "Real-time dashboards and territorial maps give administrators instant insight into network-wide performance." },
-              { icon: "🧠", title: "Zero institutional memory loss", desc: "All activities, reports and communications are stored and searchable — nothing is lost when members rotate." },
+              { icon: "📈", title: "Scalable to 1,000+ members", desc: "A digital-first infrastructure that grows with the network — ready for new cohorts, regions and partnerships." },
             ].map((item, i) => (
-              <div key={i} className="flex gap-4 items-start rounded-2xl bg-white border border-[#722D50]/10 p-6 shadow-sm">
-                <span className="text-3xl shrink-0">{item.icon}</span>
+              <div key={i} className="flex gap-5 items-start rounded-2xl bg-white border border-[#722D50]/10 p-7 shadow-sm">
+                <span className="text-4xl shrink-0">{item.icon}</span>
                 <div>
-                  <h3 className="text-xl font-bold text-[#2a1020] mb-1">{item.title}</h3>
-                  <p className="text-base text-[#2a1020]/50 leading-relaxed">{item.desc}</p>
+                  <h3 className="text-2xl font-bold text-[#2a1020] mb-2">{item.title}</h3>
+                  <p className="text-lg text-[#2a1020]/50 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="space-y-5">
-            {[
-              { icon: "🎯", title: "Data-driven decisions", desc: "Analytics and KPIs enable program leaders to allocate resources where they matter most across 12 regions." },
-              { icon: "🤝", title: "Stronger mentor-ambassador bonds", desc: "Dedicated validation and feedback tools replace informal check-ins with a structured support system." },
-              { icon: "🏆", title: "3× higher engagement", desc: "Gamification, badges and recognition systems motivate sustained civic participation beyond initial training." },
-              { icon: "📈", title: "Scalable to 1,000+ members", desc: "A digital-first infrastructure that grows with the network — ready for new cohorts, regions and partnerships." },
-            ].map((item, i) => (
-              <div key={i} className="flex gap-4 items-start rounded-2xl bg-white border border-[#722D50]/10 p-6 shadow-sm">
-                <span className="text-3xl shrink-0">{item.icon}</span>
-                <div>
-                  <h3 className="text-xl font-bold text-[#2a1020] mb-1">{item.title}</h3>
-                  <p className="text-base text-[#2a1020]/50 leading-relaxed">{item.desc}</p>
+          <div className="flex items-center justify-center">
+            <div className="grid grid-cols-2 gap-6 w-full max-w-md">
+              {[
+                { value: "80%", label: "Faster Response", color: "#A6CE39" },
+                { value: "100%", label: "Digital Reports", color: "#722D50" },
+                { value: "12", label: "Regions Connected", color: "#A6CE39" },
+                { value: "1K+", label: "Ready to Scale", color: "#722D50" },
+              ].map((stat, i) => (
+                <div key={i} className="rounded-2xl bg-white border-2 p-8 text-center space-y-3 shadow-sm" style={{ borderColor: `${stat.color}30` }}>
+                  <p className="text-5xl font-black" style={{ color: stat.color }}>{stat.value}</p>
+                  <p className="text-sm text-[#2a1020]/50 font-semibold uppercase tracking-wide">{stat.label}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
