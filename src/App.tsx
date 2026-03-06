@@ -13,6 +13,7 @@ import EventApplicationPage from "./pages/EventApplicationPage";
 import EventReportPage from "./pages/EventReportPage";
 import ProfilePage from "./pages/ProfilePage";
 import MentorValidationPage from "./pages/MentorValidationPage";
+import LandingPage from "./pages/LandingPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,20 +24,19 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <AppLayout>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/network" element={<NetworkPage />} />
-            <Route path="/resources" element={<ResourcesPage />} />
-            <Route path="/hub" element={<HubPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/onboarding" element={<OnboardingPage />} />
-            <Route path="/event-application" element={<EventApplicationPage />} />
-            <Route path="/event-report" element={<EventReportPage />} />
-            <Route path="/validation" element={<MentorValidationPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AppLayout>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route element={<AppLayout><Dashboard /></AppLayout>} path="/dashboard" />
+          <Route element={<AppLayout><NetworkPage /></AppLayout>} path="/network" />
+          <Route element={<AppLayout><ResourcesPage /></AppLayout>} path="/resources" />
+          <Route element={<AppLayout><HubPage /></AppLayout>} path="/hub" />
+          <Route element={<AppLayout><ProfilePage /></AppLayout>} path="/profile" />
+          <Route element={<AppLayout><OnboardingPage /></AppLayout>} path="/onboarding" />
+          <Route element={<AppLayout><EventApplicationPage /></AppLayout>} path="/event-application" />
+          <Route element={<AppLayout><EventReportPage /></AppLayout>} path="/event-report" />
+          <Route element={<AppLayout><MentorValidationPage /></AppLayout>} path="/validation" />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
