@@ -4,9 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
-import { LogIn, Eye, EyeOff } from "lucide-react";
+import { LogIn, Eye, EyeOff, ScanFace, Fingerprint } from "lucide-react";
 import citizinLogo from "@/assets/citizin-logo.png";
 
 const LoginPage = () => {
@@ -31,6 +32,14 @@ const LoginPage = () => {
       toast.success("Connexion réussie !");
       navigate("/dashboard");
     }
+  };
+
+  const handleBiometric = (type: "face" | "fingerprint") => {
+    toast.info(
+      type === "face"
+        ? "La reconnaissance faciale sera disponible prochainement."
+        : "L'empreinte digitale sera disponible prochainement."
+    );
   };
 
   return (
@@ -88,13 +97,42 @@ const LoginPage = () => {
                 {loading ? "Connexion..." : "Se connecter"}
               </Button>
             </form>
+
+            <div className="flex items-center gap-3 my-5">
+              <Separator className="flex-1" />
+              <span className="text-xs text-muted-foreground whitespace-nowrap">Ou continuer avec</span>
+              <Separator className="flex-1" />
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={() => handleBiometric("face")}
+                className="flex flex-col items-center gap-2 rounded-xl border border-border bg-background p-4 hover:bg-accent transition-colors"
+              >
+                <ScanFace className="w-6 h-6 text-primary" />
+                <span className="text-xs font-medium text-foreground">Reconnaissance faciale</span>
+                <span className="text-[10px] text-muted-foreground leading-tight text-center">
+                  Connexion rapide avec reconnaissance faciale.
+                </span>
+              </button>
+              <button
+                onClick={() => handleBiometric("fingerprint")}
+                className="flex flex-col items-center gap-2 rounded-xl border border-border bg-background p-4 hover:bg-accent transition-colors"
+              >
+                <Fingerprint className="w-6 h-6 text-primary" />
+                <span className="text-xs font-medium text-foreground">Empreinte digitale</span>
+                <span className="text-[10px] text-muted-foreground leading-tight text-center">
+                  Connexion rapide avec empreinte digitale.
+                </span>
+              </button>
+            </div>
           </CardContent>
         </Card>
 
         <p className="text-center text-sm text-muted-foreground">
-          Pas encore de compte ?{" "}
+          Première connexion ?{" "}
           <Link to="/signup" className="text-primary font-semibold hover:underline">
-            S'inscrire
+            Faire une demande d'accès
           </Link>
         </p>
 
