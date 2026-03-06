@@ -15,7 +15,7 @@ const LandingPage = () => {
           <div className="flex items-center gap-3">
             <span className="hidden sm:inline text-xs text-[#722D50]/50 tracking-wide">Accès réservé aux membres</span>
             <Button
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/login")}
               className="bg-[#722D50] text-white hover:bg-[#5a2240] font-semibold text-sm px-5 h-9 rounded-full shadow-[0_4px_15px_rgba(114,45,80,0.25)]"
             >
               Connexion
@@ -74,7 +74,7 @@ const LandingPage = () => {
             {/* CTA */}
             <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/login")}
                 size="lg"
                 className="bg-[#722D50] text-white hover:bg-[#5a2240] font-bold text-base px-10 h-12 rounded-full shadow-[0_6px_25px_rgba(114,45,80,0.3)] hover:shadow-[0_8px_35px_rgba(114,45,80,0.45)] transition-all duration-300"
               >
