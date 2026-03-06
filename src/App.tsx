@@ -19,6 +19,7 @@ import SignupPage from "./pages/SignupPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import EventDetailPage from "./pages/EventDetailPage";
 import NotFound from "./pages/NotFound";
+import PitchDeckPage from "./pages/PitchDeckPage";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 import AdminAmbassadorsPage from "./pages/admin/AdminAmbassadorsPage";
@@ -73,6 +74,7 @@ const App = () => (
           <Route path="/admin/analytics" element={<AdminLayout><AdminAnalyticsPage /></AdminLayout>} />
           <Route path="/admin/settings" element={<AdminLayout><AdminSettingsPage /></AdminLayout>} />
 
+          <Route path="/pitch" element={<PitchDeckPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
