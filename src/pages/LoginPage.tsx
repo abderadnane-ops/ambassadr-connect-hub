@@ -76,7 +76,10 @@ const LoginPage = () => {
                 <Label className="text-xs text-muted-foreground">Choisir votre accès</Label>
                 <div className="relative grid grid-cols-2 p-1 rounded-xl bg-muted/60 border border-border/40">
                   <div
-                    className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg bg-primary shadow-sm transition-transform duration-200 ease-out"
+                    className={cn(
+                      "absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg shadow-sm transition-all duration-200 ease-out",
+                      role === "admin" ? "bg-[#A6CE39]" : "bg-primary"
+                    )}
                     style={{ transform: role === "ambassador" ? "translateX(4px)" : "translateX(calc(100% + 4px))" }}
                   />
                   {([
