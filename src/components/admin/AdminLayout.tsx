@@ -12,6 +12,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import logoLight from "@/assets/citizin-logo.png";
+import AdminBottomNav from "./AdminBottomNav";
 
 const navGroups = [
   {
@@ -139,10 +140,11 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
               {allItems.find((i) => location.pathname.startsWith(i.url))?.title || "Administration"}
             </h1>
           </header>
-          <main className="flex-1 overflow-auto bg-background p-6">
+          <main className="flex-1 overflow-auto bg-background p-6 pb-24 lg:pb-6">
             {children}
           </main>
         </div>
+        <AdminBottomNav />
       </div>
     </SidebarProvider>
   );
