@@ -2,7 +2,6 @@ import { Users, MapPin, Globe, ArrowRight, Leaf, ChevronDown } from "lucide-reac
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import aminaPhoto from "@/assets/landing-amina.jpg";
-import aminaPhoto from "@/assets/landing-amina.jpg";
 
 const LandingPage = () => {
   const navigate = useNavigate();
