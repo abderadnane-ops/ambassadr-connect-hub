@@ -112,7 +112,7 @@ const OnboardingPage = () => {
         {/* Step 0: Welcome */}
         {step === 0 && (
           <div className="text-center space-y-6 animate-fade-in">
-            <img src={citizinLogo} alt="CitiZen" className="h-12 mx-auto" />
+            <img src={citizinLogo} alt="CitiZen" className="h-16 mx-auto" />
             <div className="space-y-3">
               <h1 className="font-display text-2xl font-bold">
                 Bienvenue dans CitiZen
