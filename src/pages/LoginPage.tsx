@@ -145,9 +145,28 @@ const LoginPage = () => {
                 {loading ? "Connexion..." : role === "admin" ? "Connexion administrateur" : "Se connecter"}
               </Button>
 
-
-
-
+              {/* Demo access */}
+              <div className="pt-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (role === "admin") {
+                      navigate("/admin/dashboard");
+                    } else {
+                      navigate("/dashboard");
+                    }
+                    toast.success("Accès démo activé !");
+                  }}
+                  className={cn(
+                    "w-full h-10 rounded-xl text-sm font-medium border transition-colors",
+                    role === "admin"
+                      ? "border-[#A6CE39]/40 text-[#A6CE39] hover:bg-[#A6CE39]/10"
+                      : "border-primary/40 text-primary hover:bg-primary/10"
+                  )}
+                >
+                  {role === "admin" ? "Accès démo admin" : "Accès démo ambassadeur"}
+                </button>
+              </div>
             </form>
 
             <div className="flex items-center gap-3 my-5">
