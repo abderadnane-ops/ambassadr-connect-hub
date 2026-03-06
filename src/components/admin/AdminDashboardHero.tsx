@@ -6,7 +6,7 @@ const AdminDashboardHero = () => {
   const greeting = hour < 12 ? "Bonjour" : hour < 18 ? "Bon après-midi" : "Bonsoir";
 
   return (
-    <div className="relative overflow-hidden rounded-2xl gradient-hero p-5 text-primary-foreground animate-fade-in">
+    <div className="relative overflow-hidden rounded-2xl gradient-admin-hero p-5 text-primary-foreground animate-fade-in">
       {/* Decorative circles */}
       <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/10 blur-sm" />
       <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full bg-white/5" />
