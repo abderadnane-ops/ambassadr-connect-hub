@@ -186,7 +186,12 @@ const Dashboard = () => {
                 onClick={() => navigate(`/event/${event.id}`)}
               >
                 <CardContent className="p-0">
-                  <div className={`${colors.gradient} px-4 pt-4 pb-3`}>
+                  {event.image && (
+                    <div className="w-full h-28 overflow-hidden">
+                      <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+                    </div>
+                  )}
+                  <div className={`${!event.image ? colors.gradient : ''} px-4 pt-3 pb-2`}>
                     <Badge className={`${colors.badge} border-0 text-[10px] mb-2`}>{event.type}</Badge>
                     <h4 className="font-display font-semibold text-sm group-hover:text-primary transition-colors">{event.title}</h4>
                   </div>

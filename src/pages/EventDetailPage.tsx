@@ -7,6 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { toast } from "@/hooks/use-toast";
 
+import sommetCitoyenGroup from "@/assets/events/sommet-citoyen-group.jpeg";
+import labCitoyensOujda from "@/assets/events/lab-citoyens-oujda.jpeg";
+import ambassadeursCitoyens from "@/assets/events/ambassadeurs-citoyens.png";
+
 export type ParticipationStatus = "participer" | "en_attente" | "confirme" | "complet";
 
 export interface EventData {
@@ -22,6 +26,7 @@ export interface EventData {
   participationStatus: ParticipationStatus;
   description: string;
   participants: { initials: string; name: string }[];
+  image?: string;
 }
 
 export const eventsData: EventData[] = [
@@ -37,6 +42,7 @@ export const eventsData: EventData[] = [
     color: "secondary",
     participationStatus: "participer",
     description: "Rencontre citoyenne pour discuter des enjeux locaux de la ville de Rabat. Échange ouvert entre ambassadeurs et citoyens sur les projets communautaires en cours.",
+    image: sommetCitoyenGroup,
     participants: [
       { initials: "AE", name: "Amina El Fassi" },
       { initials: "YB", name: "Youssef Bennani" },
@@ -57,6 +63,7 @@ export const eventsData: EventData[] = [
     color: "accent",
     participationStatus: "en_attente",
     description: "Atelier collaboratif sur l'éducation civique et les méthodes innovantes pour engager les jeunes dans la vie citoyenne.",
+    image: labCitoyensOujda,
     participants: [
       { initials: "HA", name: "Hassan Alaoui" },
       { initials: "LM", name: "Leila Mansouri" },
@@ -75,6 +82,7 @@ export const eventsData: EventData[] = [
     color: "primary",
     participationStatus: "complet",
     description: "Grand forum régional réunissant les ambassadeurs de la région Fès-Meknès pour planifier les actions du prochain trimestre.",
+    image: ambassadeursCitoyens,
     participants: [
       { initials: "KT", name: "Karim Tazi" },
       { initials: "AE", name: "Amina El Fassi" },
