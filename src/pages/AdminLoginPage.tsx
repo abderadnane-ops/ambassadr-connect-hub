@@ -84,7 +84,7 @@ const AdminLoginPage = () => {
     }
 
     toast.success("Vérification réussie !");
-    navigate("/dashboard");
+    navigate("/admin/dashboard");
   };
 
   const handleResend = async () => {
