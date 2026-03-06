@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,11 +8,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
-import { LogIn, Eye, EyeOff, ScanFace, Fingerprint } from "lucide-react";
+import { LogIn, Eye, EyeOff, ScanFace, Fingerprint, ShieldCheck, Users } from "lucide-react";
 import citizinLogo from "@/assets/citizin-logo.png";
+
+type Role = "ambassador" | "admin";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [role, setRole] = useState<Role>("ambassador");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +28,13 @@ const LoginPage = () => {
       return;
     }
     setLoading(true);
+
+    if (role === "admin") {
+      // For admin, redirect to admin login flow with 2FA
+      navigate("/admin/login", { state: { email, password } });
+      return;
+    }
+
     const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
     setLoading(false);
     if (error) {
@@ -58,6 +69,31 @@ const LoginPage = () => {
         <Card className="border-0 shadow-elevated">
           <CardContent className="p-6">
             <form onSubmit={handleLogin} className="space-y-4">
+              {/* Role Selector */}
+              <div className="space-y-2">
+                <Label className="text-xs text-muted-foreground">Choisir votre accès</Label>
+                <div className="grid grid-cols-2 gap-2 p-1 rounded-xl bg-muted/50">
+                  {([
+                    { value: "ambassador" as Role, icon: Users, label: "Ambassadeur" },
+                    { value: "admin" as Role, icon: ShieldCheck, label: "Admin" },
+                  ]).map((opt) => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => setRole(opt.value)}
+                      className={cn(
+                        "flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all",
+                        role === opt.value
+                          ? "bg-primary text-primary-foreground shadow-sm"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      <opt.icon className="w-4 h-4" />
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
