@@ -120,24 +120,24 @@ const LandingPage = () => {
           <div className="text-center mb-10">
             <h2 className="text-2xl font-semibold text-[#2a1020] mb-3">Initiatives citoyennes</h2>
             <p className="text-sm text-[#2a1020]/50 max-w-xl mx-auto">
-              Des projets portés par les Ambassadeurs Citoyens à travers les territoires du Maroc.
+              Des initiatives portées par les Ambassadeurs Citoyens au service des territoires du Maroc.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               {
                 title: "Éducation civique",
-                desc: "Ateliers de sensibilisation dans les établissements scolaires pour promouvoir les valeurs citoyennes.",
+                desc: "Sensibilisation à la citoyenneté, à la participation et à l'engagement des jeunes dans les territoires.",
                 icon: Lightbulb,
               },
               {
-                title: "Environnement durable",
-                desc: "Actions de nettoyage, reboisement et sensibilisation environnementale dans les communautés locales.",
+                title: "Capacitation citoyenne",
+                desc: "Renforcement des capacités des jeunes, des femmes et des citoyens afin de porter leurs voix et participer aux espaces de décision.",
                 icon: Globe,
               },
               {
-                title: "Solidarité sociale",
-                desc: "Initiatives d'entraide et de soutien aux populations vulnérables dans les différentes régions.",
+                title: "Appui aux coopératives",
+                desc: "Accompagnement des coopératives et des initiatives locales pour renforcer leur développement et leur impact dans les territoires.",
                 icon: Heart,
               },
             ].map((project, i) => (
