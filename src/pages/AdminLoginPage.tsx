@@ -173,6 +173,15 @@ const AdminLoginPage = () => {
                   <LogIn className="w-4 h-4 mr-2" />
                   {loading ? "Connexion..." : "Connexion"}
                 </Button>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => navigate("/admin/dashboard")}
+                  className="w-full h-11 rounded-xl font-semibold"
+                >
+                  Accès démo Admin
+                </Button>
               </form>
             ) : (
               <div className="space-y-5">
