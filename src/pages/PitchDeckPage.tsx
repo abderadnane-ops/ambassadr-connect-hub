@@ -329,9 +329,9 @@ const slides = [
           </div>
           <div className="pt-8">
             <p className="text-lg text-white/30">
-              Une initiative du mouvement <span className="text-[#A6CE39] font-semibold">Les Citoyens</span>
+              An initiative of the <span className="text-[#A6CE39] font-semibold">Les Citoyens</span> movement
             </p>
-            <p className="text-base text-white/20 mt-2">Mieux vivre ensemble</p>
+            <p className="text-base text-white/20 mt-2">Living better together</p>
           </div>
         </div>
       </div>
