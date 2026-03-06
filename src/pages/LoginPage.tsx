@@ -145,11 +145,28 @@ const LoginPage = () => {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => navigate(role === "admin" ? "/admin/dashboard" : "/dashboard")}
+                onClick={() => {
+                  localStorage.setItem("demo_role", "ambassador");
+                  navigate(role === "admin" ? "/admin/dashboard" : "/dashboard");
+                }}
                 className={cn("w-full h-11 rounded-xl font-semibold", role === "admin" && "border-[#A6CE39] text-[#A6CE39] hover:bg-[#A6CE39]/10")}
               >
                 Accès démo {role === "admin" ? "Admin" : "Ambassadeur"}
               </Button>
+
+              {role === "ambassador" && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    localStorage.setItem("demo_role", "mentor");
+                    navigate("/dashboard");
+                  }}
+                  className="w-full h-11 rounded-xl font-semibold border-accent text-accent hover:bg-accent/10"
+                >
+                  Accès démo Mentor
+                </Button>
+              )}
 
               {role === "admin" && (
                 <p className="text-[11px] text-muted-foreground text-center">
