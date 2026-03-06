@@ -1,5 +1,6 @@
-import { Search, Bell } from "lucide-react";
+import { Search, Bell, Shield } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import citizinLogo from "@/assets/citizin-logo-dark.png";
 import NotificationPanel from "./NotificationPanel";
@@ -8,6 +9,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 const TopBar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -28,6 +30,13 @@ const TopBar = () => {
                 <img src={citizinLogo} alt="CitiZen" className="h-9 w-auto object-contain" />
               </div>
               <div className="flex items-center gap-0.5">
+                <button
+                  onClick={() => navigate("/admin/dashboard")}
+                  className="p-2 rounded-full hover:bg-muted transition-all duration-200 hover:scale-105"
+                  title="Administration"
+                >
+                  <Shield className="w-5 h-5 text-muted-foreground" />
+                </button>
                 <LanguageSwitcher />
                 <button
                   onClick={() => setSearchOpen(true)}
